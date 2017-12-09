@@ -360,15 +360,11 @@ adapter.on('stateChange', function (id, state) { //if adapter state changes do
 	/*
 	var idSplitArray = id.split("."); //creates array from "id" based on separator "."
 	var idStateName = idSplitArray[idSplitArray.length - 1]; //extract idStateName
-*/
-	//alternativ, bei Gruppierung der States mittels "." wesentlich besser:
+	*/
 	var deleteStr = adapter.namespace + "."; // define string to be removed
 	var idStateName = S(id).strip(deleteStr).s; // remove string
-adapter.log.debug("vor foo");
-	
 	
 	foo: {
-adapter.log.debug("vor indexOf");
 		if (idStateName.indexOf(".Ctl_") > -1) { // if stateName contains ".Ctl_" then change to Control handling
 			adapter.log.debug("ControlState change: " + idStateName + " " + state.val);
 			var controlReturn = control(idStateName, state.val);
@@ -389,12 +385,9 @@ adapter.log.debug("vor indexOf");
 						break foo;
 					}
 		var Tx_Cc = lookupDataTx[0]; // Tx_Cc is first Element in returned array
-		//adapter.log.debug("lookupData 1 = " + Tx_Cc);
 		var Tx_Data = lookupDataTx[1]; // Tx_Data is second Element in returned array
-		//adapter.log.debug("lookupData 2 = " + Tx_Data);
-
+	
 		var Tx_Data_Str = Tx_Data.toString(16); // convert Tx_Data to HEX
-//		var Tx_Dl = dataLengthTx(Tx_Data_Str); // determine Data length
 		var kannEntfallen = "";
 		sendIP(Tx_Zn, Tx_Cc, kannEntfallen/*Tx_Dl*/, Tx_Data_Str); // send Data
 	}
@@ -416,15 +409,6 @@ function control(idstateName, stateVal) {
 		requestStatus('PRESET');
 		return 'exit';
 		break;
-	/*
-	case "arcamTuner.FM.Tune.Ctl_Up":
-	case "arcamTuner.FM.Tune.Ctl_Down":
-		if (stateVal == 0) { // wenn 0, dann ignorieren, wenn 1 dann ausführen
-			return 'exit';
-		} else {
-			return;
-		}
-		*/
 	default:
 		break;
 	}
@@ -445,16 +429,10 @@ function sendIP(Tx_Zn, Tx_Cc, kannEntfallen/*Tx_Dl*/, Tx_Data_Str) { //send IP b
 		buffer.writeUInt8(Tx_Dl, 3);
 		for (var z = 0; z < Tx_Dl; z++) // fill Buffer with individual Bytes from Tx_Data_Str
 		{
-			/*	var DataFirstByte = 2 * z;
-			var DataLastByte = DataFirstByte + 2;
-			var strSlice = Tx_Data_Str.slice(DataFirstByte,DataLastByte);
-			var writeData = parseInt(strSlice, 16);
-			buffer.writeUInt8(writeData, 4+z);
-			 */
-			// etwas geschmeidiger und textuell richtiger, testen
 			var byteStart = 2 * z;
 			var strSlice = Tx_Data_Str.slice(byteStart, byteStart + 2);
 			var writeData = parseInt(strSlice, 16);
+			adapter.log.debug('writeData: ' + writeData);
 			buffer.writeUInt8(writeData, 4 + z);
 
 		}
@@ -468,104 +446,6 @@ function sendIP(Tx_Zn, Tx_Cc, kannEntfallen/*Tx_Dl*/, Tx_Data_Str) { //send IP b
 	}
 }
 
-/*
-function requestStatus(requestStatusSelect) { //AMP or PRESET
-	switch (requestStatusSelect) {
-		case "AMP": // sequence of Requests if AMP-status is required
-			var StateList = arcamStateList;
-			let i = 1;
-			setTimeout(function AMPloop() {
-				if (i > StateList.length) {
-					return;
-				} else {
-					var StateName = StateList[i - 1]
-						var Split = split_StateName(StateName);
-					var ZonelessState = Split[0];
-					var Tx_Zn = Split[1];
-					var Request = lookupTx(ZonelessState, 'Req', Tx_Zn, 'Req', '0');
-					//adapter.log.debug(StateList[i] + " " + 'Req'+ " " + Tx_Zn);
-
-					if (typeof Request[0] == "undefined") {
-						// adapter.log.debug(ZonelessState + " " + Tx_Zn);
-						return;
-					}
-
-					var Tx_Cc = Request[0];
-					var Tx_Data = Request[1];
-					// adapter.log.debug("lookup TxData = " + Tx_Data + "/ Tx_Zn = " + Tx_Zn);
-					var Tx_Data_Str = Tx_Data; //.toString(16);
-					var Tx_Dl = 1;
-					sendIP(Tx_Zn, Tx_Cc, Tx_Dl, Tx_Data_Str);
-					//adapter.log.debug(Tx_Zn + " " + Tx_Cc + " " + Tx_Dl + " " + Tx_Data_Str);
-					adapter.log.debug("Status Request sent for: " + StateName);
-					i++;
-					//return i;
-				}
-				setTimeout(AMPloop, 200);
-			}, 200);
-			break;
-
-		case "PRESET": // sequence of Requests if PRESET-status is required
-			var StateList = arcamPresetStateList;
-			let i2 = 1;
-			setTimeout(function PRESETloop() {
-				if (i2 > NumberOfPresets) {
-					return;
-				} else {
-					var Tx_Zn = '01'; // always Zone 1
-					var Tx_Cc = '1b'; // always '1b'
-					var Tx_Dl = 1; // always '01'
-					var j = i2;
-					var Tx_Data_Str = j.toString(16); // increment Preset-Number with each loop
-					//adapter.log.debug(Tx_Zn + " " + Tx_Cc + " " + Tx_Dl + " " + Tx_Data_Str);
-					sendIP(Tx_Zn, Tx_Cc, Tx_Dl, Tx_Data_Str);
-					adapter.log.debug("Status Request sent for Preset: " + j);
-					i2++;
-				}
-				setTimeout(PRESETloop, 200);
-			}, 200);
-
-			break;
-		case "ALL": // if complete Status is requested, call both AMP and PRESET options in sequence
-			requestStatus("AMP");
-			requestStatus("PRESET");
-			break;
-
-			// NEU Abfrage eines einzelnen Status
-		default:
-			var isInArray = arcamStateList.includes(requestStatusSelect); //check if requestStatusSelect is valid state
-			if (isInArray = true) {
-				var StateName = requestStatusSelect;
-				var Split = split_StateName(StateName);
-				var ZonelessState = Split[0];
-				var Tx_Zn = Split[1];
-				var Request = lookupTx(ZonelessState, 'Req', Tx_Zn, 'Req', '0');
-				//adapter.log.debug(StateList[i] + " " + 'Req'+ " " + Tx_Zn);
-
-				if (typeof Request[0] == "undefined") {
-					// adapter.log.debug(ZonelessState + " " + Tx_Zn);
-					return;
-				}
-
-				var Tx_Cc = Request[0];
-				var Tx_Data = Request[1];
-				// adapter.log.debug("lookup TxData = " + Tx_Data + "/ Tx_Zn = " + Tx_Zn);
-				var Tx_Data_Str = Tx_Data; //.toString(16);
-				var Tx_Dl = 1;
-				sendIP(Tx_Zn, Tx_Cc, Tx_Dl, Tx_Data_Str);
-				//adapter.log.debug(Tx_Zn + " " + Tx_Cc + " " + Tx_Dl + " " + Tx_Data_Str);
-				adapter.log.debug("Status Request sent for: " + StateName);
-				break;
-			} else {
-				break;
-			}
-			//
-
-	}
-}
-*/
-
-// under construction:
 
 function requestStatus(requestStatusSelect) { // valid arguments: [AMP / PRESET / ALL /specific state]
 	var scanAll = 0;
@@ -578,13 +458,6 @@ function requestStatus(requestStatusSelect) { // valid arguments: [AMP / PRESET 
 			let zoneCounter = 0;
 			var Tx_Dl = 1;
 			setTimeout(function requestLoopAMP() {
-				/*if (statusRequestActive = 1){
-					
-				}				
-				 else {
-				statusRequestActive = 1;
-				}
-				*/
 				if (i >= lookupTable.length) {
 //					statusRequestActive = 0;
 					if (scanAll == 1){
@@ -613,20 +486,6 @@ function requestStatus(requestStatusSelect) { // valid arguments: [AMP / PRESET 
 							i++;
 						}
 						
-					/*	
-						
-						
-						if ((zones == 2) && (zoneflag < 2)){
-							zoneflag = 2;
-							var Tx_Data = lookupTable[i][4];
-							var Tx_Zn = '01';
-						} else {
-							zoneflag--;
-							var Tx_Data = lookupTable[i][5];
-							var Tx_Zn = '02';
-							i++;
-						}
-					*/	
 						sendIP(Tx_Zn, Tx_Cc, Tx_Dl, Tx_Data);
 						//adapter.log.debug(Tx_Zn + " " + Tx_Cc + " " + Tx_Dl + " " + Tx_Data_Str);
 						adapter.log.debug("Status Request sent for: " + zonelessState + zoneCounter);
@@ -644,12 +503,6 @@ function requestStatus(requestStatusSelect) { // valid arguments: [AMP / PRESET 
 			var StateList = arcamPresetStateList;
 			let j = 1;
 			setTimeout(function requestLoopPRESET() {
-				/*if (statusRequestActive = 1){
-					setTimeout(requestLoopPRESET, 500);
-				} else {
-				statusRequestActive = 1;
-				}
-				*/
 				if (j > NumberOfPresets) {
 				//if (j > StateList.length){
 					statusRequestActive = 0;
@@ -800,25 +653,20 @@ function lookupTx(stName, stValue, zone, Mode, Egal) { //look up data required t
 
 	case 'Tone':
 		if (0 <= stValue && stValue <= 20) {
-			stValue = S(stValue + "").padLeft(2, 0);
-
-			//S(parseInt(data2, 16) + "").padLeft(2, 0);
-
+			stValue = stValue;
 		}
 		if (0 > stValue && stValue >= -20) {
 			stValue = ((-1) * stValue) + 128;
-			stValue = S(stValue + "").padLeft(2, 0);
-
 		}
 		if (stName == "arcamAudio.Subwoofer.Trim"){
 			stValue = stValue * 2; // compensation for 0.5dB steps
 		}
+		adapter.log.debug("send tone: " + stValue);
 		break;
 	default:
 		break;
 
 	case 'Volume':
-		//stValue = parseInt(stateVal1, 16);
 		stValue = limitVolumeStep(stValue, currentVolume);
 		switch (Tx_Cc)
 		{
@@ -901,6 +749,7 @@ function lookupRx(Rx_Cc, Rx_Data, Rx_Zn, Mode, Rx_Dl) { //look up data required 
 		if (stateName1 == "arcamAudio.Subwoofer.Trim"){
 			stateVal1 = stateVal1 / 2; // only 0,5dB steps as opposed to bass, treble, etc.
 		}
+		adapter.log.debug("Tone: " + stateVal1);
 		break;
 
 		case "Special":
@@ -954,7 +803,7 @@ function lookupRx(Rx_Cc, Rx_Data, Rx_Zn, Mode, Rx_Dl) { //look up data required 
 				DetailData2 = hex2ascii(Data_n);
 				break;
 			}
-			stateName1 = 'arcamTuner.Preset' + "." + PresetNumber + "." + DetailType1; // evtl. DetailType entfallen lassen, da es eindeutig ist, wenn Freq. oder Name angezeigt wird und nicht nach DAB/FM unterschieden werden kann
+			stateName1 = 'arcamTuner.Preset' + "." + PresetNumber + "." + DetailType1;
 			stateVal1 = DetailData1;
 			stateName2 = 'arcamTuner.Preset' + "." + PresetNumber + "." + DetailType2;
 			stateVal2 = DetailData2;
@@ -1052,7 +901,6 @@ function searchList(listName, param1, offset1, param2a, param2b, offset2, param3
 }
 
 function data2frequencyStr(data1, data2, type) {
-	adapter.log.debug(data1 + " " + data2);
 	var frequencyStr = parseInt(data1, 16) + "" + S(parseInt(data2, 16) + "").padLeft(2, 0); // Testweise ohne . und MHz
 	switch (type) {
 	case 'digits':
@@ -1078,7 +926,6 @@ function connectToArcam(host) {
 	});
 	//var connecting = false;
 	connecting = false;
-	adapter.log.debug("vor Aufruf autoRequest");
 	autoRequest();
 	
 	function restartConnection() {
@@ -1116,8 +963,6 @@ function connectToArcam(host) {
 		var byteLength = data.byteLength;
 
 		var response = dataStr.split("\r");
-		//adapter.log.debug("response: " + response + " " + byteLength + " " + response.length);
-
 		//
 		// Response-Auswertung in eigene Funktion verschieben
 		//
@@ -1144,7 +989,6 @@ function connectToArcam(host) {
 
 			if (Rx_St == "21" && Rx_Ac == "00" && Rx_Et == "0d") // Check Start- and EndByte and Answer Code
 			{
-				//adapter.log.debug("RxSt");
 				var stateName;
 				var stateVal;
 				var zoneName;
@@ -1155,13 +999,9 @@ function connectToArcam(host) {
 					adapter.log.debug("Message Code not implemented yet");
 				}
 				var stateName = lookupDataRx[0];
-				//adapter.log.debug("lookupData Rx 1 = " + stateName);
 				var stateVal = lookupDataRx[1];
-				//adapter.log.debug("lookupData Rx 2 = " + stateVal);
 				var stateName2 = lookupDataRx[2];
-				//adapter.log.debug("lookupData Rx 1 = " + stateName);
 				var stateVal2 = lookupDataRx[3];
-				//adapter.log.debug("lookupData Rx 2 = " + stateVal);
 				var stateCount = lookupDataRx[4];
 
 				adapter.setState(stateName, {
@@ -1228,7 +1068,7 @@ function hex2ascii(str1) { // convert HEX to ASCII
 }
 
 // Arcam sends wrong german special characters (ÄÖÜäöüß). This is a workaround and can be deleted if Arcam fixes the text output
-// also other special characters are wrong (e.g. french), so additions to replacement table are welcome
+// also other special characters are wrong (e.g. french), so additions to replacement table (see above) are welcome
 function fixSpecialCharacters(text) {
 	var snip;
 	var text2 = text + "";
@@ -1280,15 +1120,6 @@ function createStatesIfNotExist(List, ReadWrite) { // create states if they do n
 	}
 }
 
-/*Beispielcode prüfen ob String:
-var a = '0x0b';
-var test = isString(a)
-function isString (obj) {
-return (Object.prototype.toString.call(obj) === '[object String]');
-}
-alert(test);
- */
-
 // Additional Functions
 
 
@@ -1326,38 +1157,6 @@ function FMdirectTune(directTuneFrequencyRaw) {
 		return;
 	}
 
-	/*
-	var deltaFrequency1 = Math.abs(directTuneFrequency - currentFrequency);
-	adapter.log.debug("deltaFrequency1 " + deltaFrequency1);
-	if (directTuneFrequency < currentFrequency) {
-		var tuningDirection1 = "down";
-	}
-	if (directTuneFrequency > currentFrequency) {
-		var tuningDirection1 = "up";
-	}
-	if (directTuneFrequency == currentFrequency) {
-		return;
-	}
-
-	var deltaFrequency2 = (10800 - Math.max(directTuneFrequency, currentFrequency)) + (Math.min(directTuneFrequency, currentFrequency) - 8745);
-	adapter.log.debug("deltaFrequency2 " + deltaFrequency2);
-	if (directTuneFrequency < currentFrequency) {
-		var tuningDirection2 = "up";
-	} else {
-		var tuningDirection2 = "down";
-	}
-
-	if (deltaFrequency1 <= deltaFrequency2) {
-		var deltaFrequency = deltaFrequency1;
-		var tuningDirection = tuningDirection1;
-	}
-	if (deltaFrequency1 > deltaFrequency2) {
-		var deltaFrequency = deltaFrequency2;
-		var tuningDirection = tuningDirection2;
-	}
-	adapter.log.debug("deltaFrequency " + deltaFrequency);
-	*/
-// umgeschrieben:
 	var deltaFrequency, deltaFrequency1, deltaFrequency2, tuningDirection, tuningSteps, FMzone;
 	
 	deltaFrequency1 = Math.abs(directTuneFrequency - currentFrequency);
@@ -1404,6 +1203,20 @@ function tuneFM(FMzone, tuningSteps, tuningDirection) {
 		}
 		setTimeout(sendTuneCommand, 250);
 	}, 250);
+}
+
+
+function limitVolumeStep(targetVol, currentVol){
+// limits the maximum (positive) volume step to xdB, defined by stepLimit. Avoids accidental increases and potential damage to speakers
+var stepLimit = 10; //e.g. 10dB max step
+if ((targetVol - currentVol) > stepLimit){
+	adapter.log.debug('Target Volume: ' + targetVol + "/" + 'Current Volume: ' + currentVol);
+	var filteredVolume = currentVol + stepLimit;
+	adapter.log.debug('Filtered Volume: ' + filteredVolume);
+	} else {
+	var filteredVolume = targetVol;
+}
+return filteredVolume;
 }
 
 function main() {
@@ -1492,18 +1305,3 @@ Mögliche Fallstricke: evtl. müssen während Ramp die emfangenen Volume messages i
 
 */
 
-/*
-Gerüst limitVolumeStep
-Ziel ist es, versehentliche, große Lautstärkeänderungen zu verhindern, eine graduelle Regelung jedoch nicht zu behindern.
-*/
-function limitVolumeStep(targetVol, currentVol){
-var stepLimit = 10; //beispielsweise 10dB max Lautstärkeschritt, konfigurierbar auslegen
-if ((targetVol - currentVol) > stepLimit){
-	adapter.log.debug('Target Volume: ' + targetVol + "/" + 'Current Volume: ' + currentVol);
-	var filteredVolume = currentVol + stepLimit;
-	adapter.log.debug('Filtered Volume: ' + filteredVolume);
-	} else {
-	var filteredVolume = targetVol;
-}
-return filteredVolume;
-}
