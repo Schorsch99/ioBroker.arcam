@@ -1,12 +1,12 @@
 {
     "common": {
         "name":         "arcam",
-        "version":      "0.0.1",
+        "version":      "0.0.2",
         "title":        "Arcam Adapter",
         "desc":         "Arcam AVR adapter (AVR390/550/850)",
         "platform":     "Javascript/Node.js",
         "mode":         "daemon",
-        "icon":         "arcam.png",
+        "icon":         "admin/arcam.png",
         "loglevel":     "debug",
 		"keywords":     ["arcam", "AVR", "Receiver"],
         "main":         "arcam.js",
@@ -14,7 +14,7 @@
         "type":          "hardware",
 		"authors": 		["Schorsch99"],
         "license":       "MIT",
-        "readme":        "",
+        "readme":        "README.md",
         "extIcon":       ""
     },
 	
@@ -27,7 +27,7 @@
 
 	"instanceObjects": [
 	{
-		"_id": 	"arcamConnected",
+		"_id": 	"arcamSystem.Info.Connected",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR connected via TCP/IP",
@@ -40,7 +40,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamPower",
+		"_id": 	"arcamSystem.Power",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR power state",
@@ -53,7 +53,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamPower2",
+		"_id": 	"arcamSystem.Power2",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR power state zone 2",
@@ -66,7 +66,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamDisplay.Brightness",
+		"_id": 	"arcamSystem.Display.Brightness",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Display Brightness",
@@ -79,7 +79,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamAudio.Headphones.Status",
+		"_id": 	"arcamAudio.Info.Headphones.Status",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Headphones Connected",
@@ -118,7 +118,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamInput",
+		"_id": 	"arcamInput.Input",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Input Zone 1",
@@ -131,7 +131,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamInput2",
+		"_id": 	"arcamInput.Input2",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Input Zone 2",
@@ -144,7 +144,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamVideo.Input",
+		"_id": 	"arcamInput.Video",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Video Input Zone 1",
@@ -157,7 +157,7 @@
 		"native": {}
     },
 	{
-		"_id": 	"arcamVideo.Input2",
+		"_id": 	"arcamInput.Video2",
 		"type": "state",
 		"common": {
 			"name": 	"Arcam-AVR Video Input Zone 2",

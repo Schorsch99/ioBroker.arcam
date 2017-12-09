@@ -22,8 +22,8 @@ var statusRequestActive = 0;
 
 var lookupTable = [
 	//	stateName						stateVal			Mode	Cc		Data_Z1		Data_Z2		DataType	Zones	createState(w/r)
-	['arcamAudio.Volume.Level', 'VALUE', 'TxRx', '0d', 'VALUE', 'VALUE', 'Volume', 2, '0'],
-	['arcamAudio.Volume.Level', 'Req', 'Req', '0d', 'f0', 'f0', 'Discrete', 2, 'wr'],
+	['arcamAudio.Volume.Volume', 'VALUE', 'TxRx', '0d', 'VALUE', 'VALUE', 'Volume', 2, '0'],
+	['arcamAudio.Volume.Volume', 'Req', 'Req', '0d', 'f0', 'f0', 'Discrete', 2, 'wr'],
 	
 	//arcamInput.Input Tx (via RC5)
 	['arcamInput.Input', 'Follow Zone 1', 'Tx', '08', '1014', '1700', 'Discrete', 2, '0'],
