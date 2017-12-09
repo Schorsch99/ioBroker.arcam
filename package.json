@@ -1,63 +1,26 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "/home/pi/development/iobroker.arcam",
-        "scope": null,
-        "escapedName": null,
-        "name": null,
-        "rawSpec": "/home/pi/development/iobroker.arcam",
-        "spec": "/home/pi/development/iobroker.arcam",
-        "type": "directory"
-      },
-      "/"
-    ]
-  ],
-  "_from": "../../home/pi/development/iobroker.arcam",
-  "_id": "iobroker.arcam@0.0.1",
-  "_inCache": true,
-  "_location": "/iobroker.arcam",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "/home/pi/development/iobroker.arcam",
-    "scope": null,
-    "escapedName": null,
-    "name": null,
-    "rawSpec": "/home/pi/development/iobroker.arcam",
-    "spec": "/home/pi/development/iobroker.arcam",
-    "type": "directory"
-  },
-  "_requiredBy": [
-    "#USER"
-  ],
-  "_resolved": "file:../../home/pi/development/iobroker.arcam",
-  "_shasum": "a272f366ef4207747c3415d72ebb69656c8a2f65",
-  "_shrinkwrap": null,
-  "_spec": "/home/pi/development/iobroker.arcam",
-  "_where": "/",
-  "author": {
-    "name": "Schorsch99"
-  },
-  "dependencies": {},
-  "description": "Adapter for ARCAM AVRs",
-  "devDependencies": {},
-  "homepage": "",
-  "keywords": [
-    "iobroker",
-    "arcam",
-    "adapter"
-  ],
-  "license": "MIT",
-  "main": "arcam.js",
   "name": "iobroker.arcam",
-  "optionalDependencies": {},
-  "readme": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "/home/pi/development/iobroker.arcam"
-  },
+  "version": "0.0.1",
+  "description": "iobroker adapter for Arcam AVRs",
+  "main": "arcam.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schorsch99/iobroker.arcam.git"
+  },
+  "keywords": [
+    "iobroker",
+    "adapter",
+    "arcam"
+  ],
+  "author": "Schorsch99",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Schorsch99/iobroker.arcam/issues"
+  },
+  "homepage": "https://github.com/Schorsch99/iobroker.arcam#readme"
 }
