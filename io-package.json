@@ -1,0 +1,323 @@
+{
+    "common": {
+        "name":         "arcam",
+        "version":      "0.0.1",
+        "title":        "Arcam Adapter",
+        "desc":         "Arcam AVR adapter (AVR390/550/850)",
+        "platform":     "Javascript/Node.js",
+        "mode":         "daemon",
+        "icon":         "arcam.png",
+        "loglevel":     "debug",
+		"keywords":     ["arcam", "AVR", "Receiver"],
+        "main":         "arcam.js",
+        "nondeletable":  true,
+        "type":          "hardware",
+		"authors": 		["Schorsch99"],
+        "license":       "MIT",
+        "readme":        "",
+        "extIcon":       ""
+    },
+	
+    "native": {
+		"host":		"192.168.178.101"
+    },
+	
+    "objects": [
+	],
+
+	"instanceObjects": [
+	{
+		"_id": 	"arcamConnected",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR connected via TCP/IP",
+			"type": 	"bool",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR connected via TCP/IP"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamPower",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR power state",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR power state"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamPower2",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR power state zone 2",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR power state zone 2"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamDisplay.Brightness",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Display Brightness",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR Display Brightness"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.Headphones.Status",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Headphones Connected",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR Headphones Connected"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamTuner.FM.Genre",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR FM Genre",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR FM Genre"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamSystem.SoftwareVersion",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Software Version",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR Software Version"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamInput",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Input Zone 1",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR Input Zone 1"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamInput2",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Input Zone 2",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR Input Zone 2"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamVideo.Input",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Video Input Zone 1",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR Video Input Zone 1"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamVideo.Input2",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Video Input Zone 2",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR Video Input Zone 2"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.Volume.Mute",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR mute",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR mute"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.Volume.Mute2",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR mute zone 2",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR mute zone 2"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.Volume.Volume",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR volume",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR volume"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.Volume.Volume2",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR volume zone 2",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR volume zone 2"
+		},
+		"native": {}
+    },
+    {
+		"_id": 	"arcamAudio.DecodeMode.2Channel",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR 2-Channel Mode",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR 2-Channel Mode"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamAudio.DecodeMode.MultiChannel",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR Multichannel Mode",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	true,
+			"desc": 	"Arcam-AVR Multichannel Mode"
+		},
+		"native": {}
+    },
+	{
+		"_id": 	"arcamTuner.DAB.DLS_PDT_Info",
+		"type": "state",
+		"common": {
+			"name": 	"Arcam-AVR DLS/PDT-Info",
+			"type": 	"string",
+			"role": 	"message",
+			"read": 	true,
+			"write": 	false,
+			"desc": 	"Arcam-AVR DLS/PDT-Info"
+		},
+		"native": {}
+    }
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	]
+}
+
+
+
+
+
+
+
+
