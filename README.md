@@ -3,8 +3,8 @@
 
 This adapter allows control of ARCAM AVRs via TCP/IP using port 50000.
 
-I have made this adapter for my personal use and thought I might share it.
-I am not a professional software programmer so the code is definetely not "best practice".
+I have made this adapter for my personal use, but maybe someone else finds it useful too.
+I am not a professional software programmer so the code is definetely not "best practice" and still buggy.
 
 Currently the most important features are implemented, I have used the following Arcam-document as a reference:
 
@@ -42,7 +42,6 @@ planned, but not implemented yet.
 
 
 The implementation concentrates on the most important control functions. 
-The document "Steuerungsprotokoll_IP_RS232C_AVR-X1200W_AVR-X2200W_AVR-X3200W_AVR-X4200W.pdf" is beeing used as a reference guide.
 
 ### 0.0.1
 * initial version
