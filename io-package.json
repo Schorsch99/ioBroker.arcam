@@ -1,3445 +1,2228 @@
 {
-    "common": {
-        "name":         "arcam",
-        "version":      "0.0.2",
-        "title":        "Arcam Adapter",
-        "desc":         "Arcam AVR adapter (AVR390/550/850)",
-        "platform":     "Javascript/Node.js",
-        "mode":         "daemon",
-        "icon":         "arcam.png",
-        "loglevel":     "debug",
-		"keywords":     ["arcam", "AVR", "Receiver"],
-        "main":         "arcam.js",
-        "nondeletable":  false,
-        "type":          "hardware",
-		"authors": 		["Schorsch99"],
-        "license":       "MIT",
-        "readme":        "README.md",
-        "extIcon":       "arcam.png"
-    },
-	
-    "native": {
-		"host":					"192.168.178.101",
-		"port":					"50000",
-		"qtyTunerPresets":		"50",
-		"volumeStepLimit":		"10",
-		"smoothVolRiseTime":	"500",
-		"smoothVolFallTime":	"500",
-		"softMuteRiseTime":		"500",
-		"softMuteFallTime":		"500",
-		"stepMuteAttenuation":	"20"
-		},
-	
-    "objects": [
-	],
-
+	"common": {
+		"name": "arcam",
+		"version": "0.0.2",
+		"title": "Arcam Adapter",
+		"desc": "Arcam AVR adapter (AVR390/550/850)",
+		"platform": "Javascript/Node.js",
+		"mode": "daemon",
+		"icon": "arcam.png",
+		"loglevel": "debug",
+		"keywords": ["arcam",
+		"AVR",
+		"Receiver"],
+		"main": "arcam.js",
+		"nondeletable": false,
+		"type": "multimedia",
+		"authors": ["Schorsch99"],
+		"license": "MIT",
+		"readme": "README.md",
+		"extIcon": "arcam.png"
+	},
+	"native": {
+		"host": "192.168.178.101",
+		"port": "50000",
+		"qtyTunerPresets": "50",
+		"volumeStepLimit": "10",
+		"smoothVolRiseTime": "500",
+		"smoothVolFallTime": "500",
+		"softMuteRiseTime": "500",
+		"softMuteFallTime": "500",
+		"stepMuteAttenuation": "20"
+	},
+	"objects": [],
 	"instanceObjects": [
-	{
-	"arcamTuner.DAB.DLS_PDT_Info": {
-		"_id": "arcamTuner.DAB.DLS_PDT_Info",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRDLS/PDT-Info",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRDLS/PDT-Info"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DecodeMode.MultiChannel": {
-		"_id": "arcamAudio.DecodeMode.MultiChannel",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRMultichannelMode",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRMultichannelMode"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DecodeMode.2Channel": {
-		"_id": "arcamAudio.DecodeMode.2Channel",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVR2-ChannelMode",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVR2-ChannelMode"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Volume.Volume2": {
-		"_id": "arcamAudio.Volume.Volume2",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRvolumezone2",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRvolumezone2"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Volume.Volume": {
-		"_id": "arcamAudio.Volume.Volume",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRvolume",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRvolume"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Volume.Mute2": {
-		"_id": "arcamAudio.Volume.Mute2",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRmutezone2",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRmutezone2"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Volume.Mute": {
-		"_id": "arcamAudio.Volume.Mute",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRmute",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRmute"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamInput.Video2": {
-		"_id": "arcamInput.Video2",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRVideoInputZone2",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRVideoInputZone2"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamInput.Video": {
-		"_id": "arcamInput.Video",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRVideoInputZone1",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRVideoInputZone1"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamInput.Input2": {
-		"_id": "arcamInput.Input2",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRInputZone2",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRInputZone2"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamInput.Input": {
-		"_id": "arcamInput.Input",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRInputZone1",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRInputZone1"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.SoftwareVersion": {
-		"_id": "arcamSystem.SoftwareVersion",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRSoftwareVersion",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRSoftwareVersion"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Genre": {
-		"_id": "arcamTuner.FM.Genre",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRFMGenre",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRFMGenre"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Info.Headphones.Status": {
-		"_id": "arcamAudio.Info.Headphones.Status",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRHeadphonesConnected",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRHeadphonesConnected"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.Display.Brightness": {
-		"_id": "arcamSystem.Display.Brightness",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRDisplayBrightness",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRDisplayBrightness"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.Power2": {
-		"_id": "arcamSystem.Power2",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRpowerstatezone2",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRpowerstatezone2"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.Power": {
-		"_id": "arcamSystem.Power",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRpowerstate",
-			"type": "string",
-			"role": "message",
-			"read": true,
-			"write": true,
-			"desc": "Arcam-AVRpowerstate"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.Info.Connected": {
-		"_id": "arcamSystem.Info.Connected",
-		"type": "state",
-		"common": {
-			"name": "Arcam-AVRconnectedviaTCP/IP",
-			"type": "bool",
-			"role": "message",
-			"read": true,
-			"write": false,
-			"desc": "Arcam-AVRconnectedviaTCP/IP"
-		},
-		"native": {
-			
-		},
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.01.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.01.Band",
-			"desc": "arcamTuner.Preset.01.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.01.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.01.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.01.StationName",
-			"desc": "arcamTuner.Preset.01.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.01.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.02.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.02.Band",
-			"desc": "arcamTuner.Preset.02.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.02.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.02.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.02.StationName",
-			"desc": "arcamTuner.Preset.02.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.02.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.03.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.03.Band",
-			"desc": "arcamTuner.Preset.03.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.03.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.03.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.03.StationName",
-			"desc": "arcamTuner.Preset.03.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.03.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.04.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.04.Band",
-			"desc": "arcamTuner.Preset.04.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.04.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.04.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.04.StationName",
-			"desc": "arcamTuner.Preset.04.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.04.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.05.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.05.Band",
-			"desc": "arcamTuner.Preset.05.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.05.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.05.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.05.StationName",
-			"desc": "arcamTuner.Preset.05.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.05.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.06.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.06.Band",
-			"desc": "arcamTuner.Preset.06.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.06.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.06.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.06.StationName",
-			"desc": "arcamTuner.Preset.06.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.06.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.07.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.07.Band",
-			"desc": "arcamTuner.Preset.07.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.07.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.07.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.07.StationName",
-			"desc": "arcamTuner.Preset.07.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.07.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.08.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.08.Band",
-			"desc": "arcamTuner.Preset.08.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.08.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.08.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.08.StationName",
-			"desc": "arcamTuner.Preset.08.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.08.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.09.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.09.Band",
-			"desc": "arcamTuner.Preset.09.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.09.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.09.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.09.StationName",
-			"desc": "arcamTuner.Preset.09.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.09.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.10.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.10.Band",
-			"desc": "arcamTuner.Preset.10.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.10.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.10.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.10.StationName",
-			"desc": "arcamTuner.Preset.10.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.10.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.11.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.11.Band",
-			"desc": "arcamTuner.Preset.11.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.11.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.11.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.11.StationName",
-			"desc": "arcamTuner.Preset.11.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.11.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.12.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.12.Band",
-			"desc": "arcamTuner.Preset.12.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.12.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.12.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.12.StationName",
-			"desc": "arcamTuner.Preset.12.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.12.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.13.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.13.Band",
-			"desc": "arcamTuner.Preset.13.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.13.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.13.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.13.StationName",
-			"desc": "arcamTuner.Preset.13.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.13.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.14.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.14.Band",
-			"desc": "arcamTuner.Preset.14.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.14.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.14.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.14.StationName",
-			"desc": "arcamTuner.Preset.14.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.14.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.15.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.15.Band",
-			"desc": "arcamTuner.Preset.15.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.15.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.15.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.15.StationName",
-			"desc": "arcamTuner.Preset.15.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.15.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.16.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.16.Band",
-			"desc": "arcamTuner.Preset.16.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.16.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.16.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.16.StationName",
-			"desc": "arcamTuner.Preset.16.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.16.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.17.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.17.Band",
-			"desc": "arcamTuner.Preset.17.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.17.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.17.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.17.StationName",
-			"desc": "arcamTuner.Preset.17.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.17.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.18.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.18.Band",
-			"desc": "arcamTuner.Preset.18.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.18.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.18.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.18.StationName",
-			"desc": "arcamTuner.Preset.18.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.18.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.19.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.19.Band",
-			"desc": "arcamTuner.Preset.19.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.19.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.19.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.19.StationName",
-			"desc": "arcamTuner.Preset.19.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.19.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.20.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.20.Band",
-			"desc": "arcamTuner.Preset.20.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.20.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.20.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.20.StationName",
-			"desc": "arcamTuner.Preset.20.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.20.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.21.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.21.Band",
-			"desc": "arcamTuner.Preset.21.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.21.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.21.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.21.StationName",
-			"desc": "arcamTuner.Preset.21.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.21.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.22.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.22.Band",
-			"desc": "arcamTuner.Preset.22.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.22.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.22.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.22.StationName",
-			"desc": "arcamTuner.Preset.22.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.22.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.23.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.23.Band",
-			"desc": "arcamTuner.Preset.23.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.23.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.23.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.23.StationName",
-			"desc": "arcamTuner.Preset.23.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.23.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.24.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.24.Band",
-			"desc": "arcamTuner.Preset.24.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.24.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.24.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.24.StationName",
-			"desc": "arcamTuner.Preset.24.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.24.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.25.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.25.Band",
-			"desc": "arcamTuner.Preset.25.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.25.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.25.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.25.StationName",
-			"desc": "arcamTuner.Preset.25.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.25.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.26.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.26.Band",
-			"desc": "arcamTuner.Preset.26.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.26.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.26.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.26.StationName",
-			"desc": "arcamTuner.Preset.26.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.26.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.27.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.27.Band",
-			"desc": "arcamTuner.Preset.27.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.27.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.27.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.27.StationName",
-			"desc": "arcamTuner.Preset.27.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.27.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.28.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.28.Band",
-			"desc": "arcamTuner.Preset.28.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.28.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.28.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.28.StationName",
-			"desc": "arcamTuner.Preset.28.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.28.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.29.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.29.Band",
-			"desc": "arcamTuner.Preset.29.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.29.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.29.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.29.StationName",
-			"desc": "arcamTuner.Preset.29.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.29.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.30.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.30.Band",
-			"desc": "arcamTuner.Preset.30.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.30.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.30.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.30.StationName",
-			"desc": "arcamTuner.Preset.30.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.30.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.31.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.31.Band",
-			"desc": "arcamTuner.Preset.31.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.31.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.31.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.31.StationName",
-			"desc": "arcamTuner.Preset.31.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.31.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.32.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.32.Band",
-			"desc": "arcamTuner.Preset.32.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.32.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.32.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.32.StationName",
-			"desc": "arcamTuner.Preset.32.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.32.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.33.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.33.Band",
-			"desc": "arcamTuner.Preset.33.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.33.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.33.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.33.StationName",
-			"desc": "arcamTuner.Preset.33.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.33.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.34.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.34.Band",
-			"desc": "arcamTuner.Preset.34.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.34.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.34.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.34.StationName",
-			"desc": "arcamTuner.Preset.34.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.34.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.35.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.35.Band",
-			"desc": "arcamTuner.Preset.35.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.35.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.35.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.35.StationName",
-			"desc": "arcamTuner.Preset.35.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.35.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.36.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.36.Band",
-			"desc": "arcamTuner.Preset.36.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.36.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.36.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.36.StationName",
-			"desc": "arcamTuner.Preset.36.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.36.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.37.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.37.Band",
-			"desc": "arcamTuner.Preset.37.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.37.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.37.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.37.StationName",
-			"desc": "arcamTuner.Preset.37.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.37.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.38.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.38.Band",
-			"desc": "arcamTuner.Preset.38.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.38.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.38.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.38.StationName",
-			"desc": "arcamTuner.Preset.38.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.38.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.39.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.39.Band",
-			"desc": "arcamTuner.Preset.39.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.39.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.39.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.39.StationName",
-			"desc": "arcamTuner.Preset.39.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.39.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.40.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.40.Band",
-			"desc": "arcamTuner.Preset.40.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.40.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.40.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.40.StationName",
-			"desc": "arcamTuner.Preset.40.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.40.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.41.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.41.Band",
-			"desc": "arcamTuner.Preset.41.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.41.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.41.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.41.StationName",
-			"desc": "arcamTuner.Preset.41.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.41.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.42.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.42.Band",
-			"desc": "arcamTuner.Preset.42.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.42.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.42.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.42.StationName",
-			"desc": "arcamTuner.Preset.42.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.42.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.43.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.43.Band",
-			"desc": "arcamTuner.Preset.43.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.43.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.43.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.43.StationName",
-			"desc": "arcamTuner.Preset.43.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.43.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.44.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.44.Band",
-			"desc": "arcamTuner.Preset.44.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.44.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.44.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.44.StationName",
-			"desc": "arcamTuner.Preset.44.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.44.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.45.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.45.Band",
-			"desc": "arcamTuner.Preset.45.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.45.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.45.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.45.StationName",
-			"desc": "arcamTuner.Preset.45.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.45.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.46.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.46.Band",
-			"desc": "arcamTuner.Preset.46.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.46.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.46.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.46.StationName",
-			"desc": "arcamTuner.Preset.46.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.46.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.47.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.47.Band",
-			"desc": "arcamTuner.Preset.47.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.47.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.47.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.47.StationName",
-			"desc": "arcamTuner.Preset.47.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.47.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.48.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.48.Band",
-			"desc": "arcamTuner.Preset.48.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.48.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.48.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.48.StationName",
-			"desc": "arcamTuner.Preset.48.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.48.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.49.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.49.Band",
-			"desc": "arcamTuner.Preset.49.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.49.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.49.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.49.StationName",
-			"desc": "arcamTuner.Preset.49.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.49.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.50.Band": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.50.Band",
-			"desc": "arcamTuner.Preset.50.Band",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.50.Band",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.50.StationName": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.50.StationName",
-			"desc": "arcamTuner.Preset.50.StationName",
-			"type": "string",
-			"read": true,
-			"write": false
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.50.StationName",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.RoomEq": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.RoomEq",
-			"desc": "arcamAudio.Mode.RoomEq",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.RoomEq",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyVolume.Status": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyVolume.Status",
-			"desc": "arcamAudio.DolbyVolume.Status",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyVolume.Status",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyVolume.CalOffset.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyVolume.CalOffset.Level",
-			"desc": "arcamAudio.DolbyVolume.CalOffset.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyVolume.CalOffset.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyVolume.CalOffset.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
-			"desc": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyVolume.CalOffset.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
-			"desc": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyLeveller.Off": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyLeveller.Off",
-			"desc": "arcamAudio.DolbyLeveller.Off",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyLeveller.Off",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyLeveller.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyLeveller.Level",
-			"desc": "arcamAudio.DolbyLeveller.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyLeveller.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyLeveller.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyLeveller.Ctl_Up",
-			"desc": "arcamAudio.DolbyLeveller.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyLeveller.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.DolbyLeveller.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.DolbyLeveller.Ctl_Down",
-			"desc": "arcamAudio.DolbyLeveller.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.DolbyLeveller.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamDisplay.FrontDisplay.Brightness": {
-		"type": "state",
-		"common": {
-			"name": "arcamDisplay.FrontDisplay.Brightness",
-			"desc": "arcamDisplay.FrontDisplay.Brightness",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamDisplay.FrontDisplay.Brightness",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.DAB.Info.DLS_PDT_Info": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.DAB.Info.DLS_PDT_Info",
-			"desc": "arcamTuner.DAB.Info.DLS_PDT_Info",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.DAB.Info.DLS_PDT_Info",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Info.Genre": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Info.Genre",
-			"desc": "arcamTuner.FM.Info.Genre",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Info.Genre",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Info.RDS": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Info.RDS",
-			"desc": "arcamTuner.FM.Info.RDS",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Info.RDS",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.DAB.Info.CurrentStation": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.DAB.Info.CurrentStation",
-			"desc": "arcamTuner.DAB.Info.CurrentStation",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.DAB.Info.CurrentStation",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.DAB.Info.ProgType": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.DAB.Info.ProgType",
-			"desc": "arcamTuner.DAB.Info.ProgType",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.DAB.Info.ProgType",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamSystem.Info.SoftwareVersion": {
-		"type": "state",
-		"common": {
-			"name": "arcamSystem.Info.SoftwareVersion",
-			"desc": "arcamSystem.Info.SoftwareVersion",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamSystem.Info.SoftwareVersion",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Headphones.SpeakerMuteWhenPresent": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
-			"desc": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.AnalogDigital": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.AnalogDigital",
-			"desc": "arcamAudio.Mode.AnalogDigital",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.AnalogDigital",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.DirectMode": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.DirectMode",
-			"desc": "arcamAudio.Mode.DirectMode",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.DirectMode",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.DecodeMode.2Channel": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.DecodeMode.2Channel",
-			"desc": "arcamAudio.Mode.DecodeMode.2Channel",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.DecodeMode.2Channel",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.DecodeMode.MultiChannel": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.DecodeMode.MultiChannel",
-			"desc": "arcamAudio.Mode.DecodeMode.MultiChannel",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.DecodeMode.MultiChannel",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamVideo.Mode.OutputResolution": {
-		"type": "state",
-		"common": {
-			"name": "arcamVideo.Mode.OutputResolution",
-			"desc": "arcamVideo.Mode.OutputResolution",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamVideo.Mode.OutputResolution",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamDisplay.Menu.Status.Status": {
-		"type": "state",
-		"common": {
-			"name": "arcamDisplay.Menu.Status.Status",
-			"desc": "arcamDisplay.Menu.Status.Status",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamDisplay.Menu.Status.Status",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset.CurrentPreset": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset.CurrentPreset",
-			"desc": "arcamTuner.Preset.CurrentPreset",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset.CurrentPreset",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.Preset": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.Preset",
-			"desc": "arcamTuner.Preset",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.Preset",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Tune.Frequency": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Tune.Frequency",
-			"desc": "arcamTuner.FM.Tune.Frequency",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Tune.Frequency",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Tune.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Tune.Ctl_Up",
-			"desc": "arcamTuner.FM.Tune.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Tune.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Tune.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Tune.Ctl_Down",
-			"desc": "arcamTuner.FM.Tune.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Tune.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Scan.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Scan.Ctl_Up",
-			"desc": "arcamTuner.FM.Scan.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Scan.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Scan.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Scan.Ctl_Down",
-			"desc": "arcamTuner.FM.Scan.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Scan.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Scan.Active": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Scan.Active",
-			"desc": "arcamTuner.FM.Scan.Active",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Scan.Active",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Treble.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Treble.Level",
-			"desc": "arcamAudio.Tone.Treble.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Treble.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Treble.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Treble.Ctl_Up",
-			"desc": "arcamAudio.Tone.Treble.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Treble.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Treble.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Treble.Ctl_Down",
-			"desc": "arcamAudio.Tone.Treble.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Treble.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Bass.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Bass.Level",
-			"desc": "arcamAudio.Tone.Bass.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Bass.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Bass.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Bass.Ctl_Up",
-			"desc": "arcamAudio.Tone.Bass.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Bass.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Bass.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Bass.Ctl_Down",
-			"desc": "arcamAudio.Tone.Bass.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Bass.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Balance.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Balance.Level",
-			"desc": "arcamAudio.Tone.Balance.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Balance.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Balance.Ctl_Right": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Balance.Ctl_Right",
-			"desc": "arcamAudio.Tone.Balance.Ctl_Right",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Balance.Ctl_Right",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Tone.Balance.Ctl_Left": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Tone.Balance.Ctl_Left",
-			"desc": "arcamAudio.Tone.Balance.Ctl_Left",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Tone.Balance.Ctl_Left",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Subwoofer.Trim.Level": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Subwoofer.Trim.Level",
-			"desc": "arcamAudio.Subwoofer.Trim.Level",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Subwoofer.Trim.Level",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Subwoofer.Trim.Ctl_Up": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Subwoofer.Trim.Ctl_Up",
-			"desc": "arcamAudio.Subwoofer.Trim.Ctl_Up",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Subwoofer.Trim.Ctl_Up",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Subwoofer.Trim.Ctl_Down": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Subwoofer.Trim.Ctl_Down",
-			"desc": "arcamAudio.Subwoofer.Trim.Ctl_Down",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Subwoofer.Trim.Ctl_Down",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.DAB.Scan.Ctl_Start": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.DAB.Scan.Ctl_Start",
-			"desc": "arcamTuner.DAB.Scan.Ctl_Start",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.DAB.Scan.Ctl_Start",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.DAB.Scan.Status": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.DAB.Scan.Status",
-			"desc": "arcamTuner.DAB.Scan.Status",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.DAB.Scan.Status",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.LipsyncDelay": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.LipsyncDelay",
-			"desc": "arcamAudio.Mode.LipsyncDelay",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.LipsyncDelay",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Mode.Compression": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Mode.Compression",
-			"desc": "arcamAudio.Mode.Compression",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Mode.Compression",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamVideo.Info.IncomingVideoMode": {
-		"type": "state",
-		"common": {
-			"name": "arcamVideo.Info.IncomingVideoMode",
-			"desc": "arcamVideo.Info.IncomingVideoMode",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamVideo.Info.IncomingVideoMode",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamAudio.Info.IncomingAudioFormat": {
-		"type": "state",
-		"common": {
-			"name": "arcamAudio.Info.IncomingAudioFormat",
-			"desc": "arcamAudio.Info.IncomingAudioFormat",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamAudio.Info.IncomingAudioFormat",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTest.Test1.Ctl_Test1": {
-		"type": "state",
-		"common": {
-			"name": "arcamTest.Test1.Ctl_Test1",
-			"desc": "arcamTest.Test1.Ctl_Test1",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTest.Test1.Ctl_Test1",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	},
-	"arcamTuner.FM.Tune.Ctl_DirectTune": {
-		"type": "state",
-		"common": {
-			"name": "arcamTuner.FM.Tune.Ctl_DirectTune",
-			"desc": "arcamTuner.FM.Tune.Ctl_DirectTune",
-			"type": "string",
-			"read": true,
-			"write": true
-		},
-		"native": {
-			
-		},
-		"_id": "arcamTuner.FM.Tune.Ctl_DirectTune",
-		"acl": {
-			"object": 1636,
-			"state": 1636,
-			"owner": "system.user.admin",
-			"ownerGroup": "system.group.administrator"
-		}
-	}
-}]
+		
+		{	"_id": "arcamTuner.DAB.DLS_PDT_Info",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRDLS/PDT-Info",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRDLS/PDT-Info"
+			},
+			"native": {}
+		},
+		
+		{	"_id": "arcamAudio.DecodeMode.MultiChannel",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRMultichannelMode",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRMultichannelMode"
+			},
+			"native": {}
+		},
+		
+		{	"_id": "arcamAudio.DecodeMode.2Channel",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVR2-ChannelMode",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVR2-ChannelMode"
+			},
+			"native": {}
+		},
+		
+		{	"_id": "arcamAudio.Volume.Volume2",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRvolumezone2",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRvolumezone2"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamAudio.Volume.Volume",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRvolume",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRvolume"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamAudio.Volume.Mute2",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRmutezone2",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRmutezone2"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamAudio.Volume.Mute",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRmute",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRmute"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamInput.Video2",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRVideoInputZone2",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRVideoInputZone2"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamInput.Video",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRVideoInputZone1",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRVideoInputZone1"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamInput.Input2",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRInputZone2",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRInputZone2"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamInput.Input",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRInputZone1",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRInputZone1"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamSystem.SoftwareVersion",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRSoftwareVersion",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRSoftwareVersion"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.FM.Genre",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRFMGenre",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRFMGenre"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamAudio.Info.Headphones.Status",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRHeadphonesConnected",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRHeadphonesConnected"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamSystem.Display.Brightness",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRDisplayBrightness",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRDisplayBrightness"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamSystem.Power2",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRpowerstatezone2",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRpowerstatezone2"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamSystem.Power",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRpowerstate",
+				"type": "string",
+				"role": "message",
+				"read": true,
+				"write": true,
+				"desc": "Arcam-AVRpowerstate"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamSystem.Info.Connected",
+			"type": "state",
+			"common": {
+				"name": "Arcam-AVRconnectedviaTCP/IP",
+				"type": "bool",
+				"role": "message",
+				"read": true,
+				"write": false,
+				"desc": "Arcam-AVRconnectedviaTCP/IP"
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.01.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.01.Band",
+				"desc": "arcamTuner.Preset.01.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.01.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.01.StationName",
+				"desc": "arcamTuner.Preset.01.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.02.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.02.Band",
+				"desc": "arcamTuner.Preset.02.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.02.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.02.StationName",
+				"desc": "arcamTuner.Preset.02.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.03.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.03.Band",
+				"desc": "arcamTuner.Preset.03.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.03.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.03.StationName",
+				"desc": "arcamTuner.Preset.03.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.04.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.04.Band",
+				"desc": "arcamTuner.Preset.04.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.04.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.04.StationName",
+				"desc": "arcamTuner.Preset.04.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.05.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.05.Band",
+				"desc": "arcamTuner.Preset.05.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.05.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.05.StationName",
+				"desc": "arcamTuner.Preset.05.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.06.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.06.Band",
+				"desc": "arcamTuner.Preset.06.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.06.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.06.StationName",
+				"desc": "arcamTuner.Preset.06.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.07.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.07.Band",
+				"desc": "arcamTuner.Preset.07.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.07.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.07.StationName",
+				"desc": "arcamTuner.Preset.07.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.08.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.08.Band",
+				"desc": "arcamTuner.Preset.08.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.08.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.08.StationName",
+				"desc": "arcamTuner.Preset.08.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.09.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.09.Band",
+				"desc": "arcamTuner.Preset.09.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.09.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.09.StationName",
+				"desc": "arcamTuner.Preset.09.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.10.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.10.Band",
+				"desc": "arcamTuner.Preset.10.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.10.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.10.StationName",
+				"desc": "arcamTuner.Preset.10.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.11.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.11.Band",
+				"desc": "arcamTuner.Preset.11.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.11.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.11.StationName",
+				"desc": "arcamTuner.Preset.11.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.12.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.12.Band",
+				"desc": "arcamTuner.Preset.12.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.12.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.12.StationName",
+				"desc": "arcamTuner.Preset.12.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.13.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.13.Band",
+				"desc": "arcamTuner.Preset.13.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.13.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.13.StationName",
+				"desc": "arcamTuner.Preset.13.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.14.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.14.Band",
+				"desc": "arcamTuner.Preset.14.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.14.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.14.StationName",
+				"desc": "arcamTuner.Preset.14.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.15.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.15.Band",
+				"desc": "arcamTuner.Preset.15.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.15.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.15.StationName",
+				"desc": "arcamTuner.Preset.15.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.16.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.16.Band",
+				"desc": "arcamTuner.Preset.16.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.16.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.16.StationName",
+				"desc": "arcamTuner.Preset.16.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.17.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.17.Band",
+				"desc": "arcamTuner.Preset.17.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.17.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.17.StationName",
+				"desc": "arcamTuner.Preset.17.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.18.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.18.Band",
+				"desc": "arcamTuner.Preset.18.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.18.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.18.StationName",
+				"desc": "arcamTuner.Preset.18.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.19.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.19.Band",
+				"desc": "arcamTuner.Preset.19.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.19.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.19.StationName",
+				"desc": "arcamTuner.Preset.19.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.20.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.20.Band",
+				"desc": "arcamTuner.Preset.20.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.20.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.20.StationName",
+				"desc": "arcamTuner.Preset.20.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.21.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.21.Band",
+				"desc": "arcamTuner.Preset.21.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.21.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.21.StationName",
+				"desc": "arcamTuner.Preset.21.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.22.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.22.Band",
+				"desc": "arcamTuner.Preset.22.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.22.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.22.StationName",
+				"desc": "arcamTuner.Preset.22.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.23.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.23.Band",
+				"desc": "arcamTuner.Preset.23.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.23.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.23.StationName",
+				"desc": "arcamTuner.Preset.23.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.24.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.24.Band",
+				"desc": "arcamTuner.Preset.24.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.24.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.24.StationName",
+				"desc": "arcamTuner.Preset.24.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.25.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.25.Band",
+				"desc": "arcamTuner.Preset.25.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.25.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.25.StationName",
+				"desc": "arcamTuner.Preset.25.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.26.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.26.Band",
+				"desc": "arcamTuner.Preset.26.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.26.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.26.StationName",
+				"desc": "arcamTuner.Preset.26.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.27.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.27.Band",
+				"desc": "arcamTuner.Preset.27.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.27.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.27.StationName",
+				"desc": "arcamTuner.Preset.27.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.28.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.28.Band",
+				"desc": "arcamTuner.Preset.28.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.28.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.28.StationName",
+				"desc": "arcamTuner.Preset.28.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.29.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.29.Band",
+				"desc": "arcamTuner.Preset.29.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.29.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.29.StationName",
+				"desc": "arcamTuner.Preset.29.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.30.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.30.Band",
+				"desc": "arcamTuner.Preset.30.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.30.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.30.StationName",
+				"desc": "arcamTuner.Preset.30.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.31.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.31.Band",
+				"desc": "arcamTuner.Preset.31.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.31.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.31.StationName",
+				"desc": "arcamTuner.Preset.31.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.32.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.32.Band",
+				"desc": "arcamTuner.Preset.32.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.32.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.32.StationName",
+				"desc": "arcamTuner.Preset.32.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.33.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.33.Band",
+				"desc": "arcamTuner.Preset.33.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.33.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.33.StationName",
+				"desc": "arcamTuner.Preset.33.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.34.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.34.Band",
+				"desc": "arcamTuner.Preset.34.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.34.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.34.StationName",
+				"desc": "arcamTuner.Preset.34.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.35.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.35.Band",
+				"desc": "arcamTuner.Preset.35.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.35.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.35.StationName",
+				"desc": "arcamTuner.Preset.35.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.36.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.36.Band",
+				"desc": "arcamTuner.Preset.36.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.36.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.36.StationName",
+				"desc": "arcamTuner.Preset.36.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.37.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.37.Band",
+				"desc": "arcamTuner.Preset.37.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.37.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.37.StationName",
+				"desc": "arcamTuner.Preset.37.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.38.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.38.Band",
+				"desc": "arcamTuner.Preset.38.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.38.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.38.StationName",
+				"desc": "arcamTuner.Preset.38.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.39.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.39.Band",
+				"desc": "arcamTuner.Preset.39.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.39.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.39.StationName",
+				"desc": "arcamTuner.Preset.39.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "arcamTuner.Preset.40.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.40.Band",
+				"desc": "arcamTuner.Preset.40.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.40.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.40.StationName",
+				"desc": "arcamTuner.Preset.40.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.41.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.41.Band",
+				"desc": "arcamTuner.Preset.41.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.41.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.41.StationName",
+				"desc": "arcamTuner.Preset.41.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.42.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.42.Band",
+				"desc": "arcamTuner.Preset.42.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.42.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.42.StationName",
+				"desc": "arcamTuner.Preset.42.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.43.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.43.Band",
+				"desc": "arcamTuner.Preset.43.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.43.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.43.StationName",
+				"desc": "arcamTuner.Preset.43.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.44.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.44.Band",
+				"desc": "arcamTuner.Preset.44.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.44.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.44.StationName",
+				"desc": "arcamTuner.Preset.44.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.45.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.45.Band",
+				"desc": "arcamTuner.Preset.45.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.45.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.45.StationName",
+				"desc": "arcamTuner.Preset.45.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.46.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.46.Band",
+				"desc": "arcamTuner.Preset.46.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.46.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.46.StationName",
+				"desc": "arcamTuner.Preset.46.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.47.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.47.Band",
+				"desc": "arcamTuner.Preset.47.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.47.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.47.StationName",
+				"desc": "arcamTuner.Preset.47.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.48.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.48.Band",
+				"desc": "arcamTuner.Preset.48.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.48.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.48.StationName",
+				"desc": "arcamTuner.Preset.48.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.49.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.49.Band",
+				"desc": "arcamTuner.Preset.49.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.49.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.49.StationName",
+				"desc": "arcamTuner.Preset.49.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.50.Band",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.50.Band",
+				"desc": "arcamTuner.Preset.50.Band",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.50.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.50.StationName",
+				"desc": "arcamTuner.Preset.50.StationName",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.RoomEq",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.RoomEq",
+				"desc": "arcamAudio.Mode.RoomEq",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyVolume.Status",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyVolume.Status",
+				"desc": "arcamAudio.DolbyVolume.Status",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyVolume.CalOffset.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyVolume.CalOffset.Level",
+				"desc": "arcamAudio.DolbyVolume.CalOffset.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
+				"desc": "arcamAudio.DolbyVolume.CalOffset.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
+				"desc": "arcamAudio.DolbyVolume.CalOffset.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyLeveller.Off",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyLeveller.Off",
+				"desc": "arcamAudio.DolbyLeveller.Off",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyLeveller.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyLeveller.Level",
+				"desc": "arcamAudio.DolbyLeveller.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyLeveller.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyLeveller.Ctl_Up",
+				"desc": "arcamAudio.DolbyLeveller.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.DolbyLeveller.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.DolbyLeveller.Ctl_Down",
+				"desc": "arcamAudio.DolbyLeveller.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamDisplay.FrontDisplay.Brightness",
+			"type": "state",
+			"common": {
+				"name": "arcamDisplay.FrontDisplay.Brightness",
+				"desc": "arcamDisplay.FrontDisplay.Brightness",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.DAB.Info.DLS_PDT_Info",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.DAB.Info.DLS_PDT_Info",
+				"desc": "arcamTuner.DAB.Info.DLS_PDT_Info",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Info.Genre",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Info.Genre",
+				"desc": "arcamTuner.FM.Info.Genre",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Info.RDS",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Info.RDS",
+				"desc": "arcamTuner.FM.Info.RDS",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.DAB.Info.CurrentStation",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.DAB.Info.CurrentStation",
+				"desc": "arcamTuner.DAB.Info.CurrentStation",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.DAB.Info.ProgType",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.DAB.Info.ProgType",
+				"desc": "arcamTuner.DAB.Info.ProgType",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamSystem.Info.SoftwareVersion",
+			"type": "state",
+			"common": {
+				"name": "arcamSystem.Info.SoftwareVersion",
+				"desc": "arcamSystem.Info.SoftwareVersion",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
+				"desc": "arcamAudio.Headphones.SpeakerMuteWhenPresent",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.AnalogDigital",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.AnalogDigital",
+				"desc": "arcamAudio.Mode.AnalogDigital",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.DirectMode",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.DirectMode",
+				"desc": "arcamAudio.Mode.DirectMode",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.DecodeMode.2Channel",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.DecodeMode.2Channel",
+				"desc": "arcamAudio.Mode.DecodeMode.2Channel",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.DecodeMode.MultiChannel",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.DecodeMode.MultiChannel",
+				"desc": "arcamAudio.Mode.DecodeMode.MultiChannel",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamVideo.Mode.OutputResolution",
+			"type": "state",
+			"common": {
+				"name": "arcamVideo.Mode.OutputResolution",
+				"desc": "arcamVideo.Mode.OutputResolution",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamDisplay.Menu.Status.Status",
+			"type": "state",
+			"common": {
+				"name": "arcamDisplay.Menu.Status.Status",
+				"desc": "arcamDisplay.Menu.Status.Status",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset.CurrentPreset",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.CurrentPreset",
+				"desc": "arcamTuner.Preset.CurrentPreset",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.Preset",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset",
+				"desc": "arcamTuner.Preset",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Tune.Frequency",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Tune.Frequency",
+				"desc": "arcamTuner.FM.Tune.Frequency",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Tune.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Tune.Ctl_Up",
+				"desc": "arcamTuner.FM.Tune.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Tune.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Tune.Ctl_Down",
+				"desc": "arcamTuner.FM.Tune.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Scan.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Scan.Ctl_Up",
+				"desc": "arcamTuner.FM.Scan.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Scan.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Scan.Ctl_Down",
+				"desc": "arcamTuner.FM.Scan.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Scan.Active",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Scan.Active",
+				"desc": "arcamTuner.FM.Scan.Active",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Treble.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Treble.Level",
+				"desc": "arcamAudio.Tone.Treble.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Treble.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Treble.Ctl_Up",
+				"desc": "arcamAudio.Tone.Treble.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Treble.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Treble.Ctl_Down",
+				"desc": "arcamAudio.Tone.Treble.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Bass.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Bass.Level",
+				"desc": "arcamAudio.Tone.Bass.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Bass.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Bass.Ctl_Up",
+				"desc": "arcamAudio.Tone.Bass.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Bass.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Bass.Ctl_Down",
+				"desc": "arcamAudio.Tone.Bass.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Balance.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Balance.Level",
+				"desc": "arcamAudio.Tone.Balance.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Balance.Ctl_Right",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Balance.Ctl_Right",
+				"desc": "arcamAudio.Tone.Balance.Ctl_Right",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Tone.Balance.Ctl_Left",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Tone.Balance.Ctl_Left",
+				"desc": "arcamAudio.Tone.Balance.Ctl_Left",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Subwoofer.Trim.Level",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Subwoofer.Trim.Level",
+				"desc": "arcamAudio.Subwoofer.Trim.Level",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Subwoofer.Trim.Ctl_Up",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Subwoofer.Trim.Ctl_Up",
+				"desc": "arcamAudio.Subwoofer.Trim.Ctl_Up",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Subwoofer.Trim.Ctl_Down",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Subwoofer.Trim.Ctl_Down",
+				"desc": "arcamAudio.Subwoofer.Trim.Ctl_Down",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.DAB.Scan.Ctl_Start",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.DAB.Scan.Ctl_Start",
+				"desc": "arcamTuner.DAB.Scan.Ctl_Start",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.DAB.Scan.Status",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.DAB.Scan.Status",
+				"desc": "arcamTuner.DAB.Scan.Status",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.LipsyncDelay",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.LipsyncDelay",
+				"desc": "arcamAudio.Mode.LipsyncDelay",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Mode.Compression",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Mode.Compression",
+				"desc": "arcamAudio.Mode.Compression",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamVideo.Info.IncomingVideoMode",
+			"type": "state",
+			"common": {
+				"name": "arcamVideo.Info.IncomingVideoMode",
+				"desc": "arcamVideo.Info.IncomingVideoMode",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Info.IncomingAudioFormat",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Info.IncomingAudioFormat",
+				"desc": "arcamAudio.Info.IncomingAudioFormat",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTest.Test1.Ctl_Test1",
+			"type": "state",
+			"common": {
+				"name": "arcamTest.Test1.Ctl_Test1",
+				"desc": "arcamTest.Test1.Ctl_Test1",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamTuner.FM.Tune.Ctl_DirectTune",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.FM.Tune.Ctl_DirectTune",
+				"desc": "arcamTuner.FM.Tune.Ctl_DirectTune",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		}
+	]
 }
-
-
-
-
-
-
-
-
