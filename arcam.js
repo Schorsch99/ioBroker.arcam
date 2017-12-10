@@ -11,10 +11,18 @@ var adapter = utils.adapter('arcam');
 var socketAVR = "";
 var stValue;
 var connecting;
-var NumberOfPresets = 50;
+var host;
+var port;
+var qtyTunerPresets;
+var volumeStepLimit;
+var smoothVolRiseTime;
+var smoothVolFallTime;
+var softMuteRiseTime;
+var softMuteFallTime;
+var stepMuteAttenuation;
 var currentFrequencyStr; // global variable, used for directTune feature
-var currentVolume;
-var currentVolume2;
+var currentVolume = 30; //initialize with low volume to avoid jumps on first startup before volume is read from AVR
+var currentVolume2 = 30; //initialize with low volume to avoid jumps on first startup before volume is read from AVR
 var currentInput;
 var currentInput2;
 var statesReady = 0;
@@ -357,10 +365,6 @@ adapter.on('stateChange', function (id, state) { //if adapter state changes do
 		return;
 	}
 
-	/*
-	var idSplitArray = id.split("."); //creates array from "id" based on separator "."
-	var idStateName = idSplitArray[idSplitArray.length - 1]; //extract idStateName
-	*/
 	var deleteStr = adapter.namespace + "."; // define string to be removed
 	var idStateName = S(id).strip(deleteStr).s; // remove string
 	
@@ -503,7 +507,7 @@ function requestStatus(requestStatusSelect) { // valid arguments: [AMP / PRESET 
 			var StateList = arcamPresetStateList;
 			let j = 1;
 			setTimeout(function requestLoopPRESET() {
-				if (j > NumberOfPresets) {
+				if (j > qtyTunerPresets) {
 				//if (j > StateList.length){
 					statusRequestActive = 0;
 					return;
@@ -667,14 +671,15 @@ function lookupTx(stName, stValue, zone, Mode, Egal) { //look up data required t
 		break;
 
 	case 'Volume':
-		stValue = limitVolumeStep(stValue, currentVolume);
-		switch (Tx_Cc)
+		switch (zone)
 		{
-			case '01':
-				currentVolume = stValue;
+			case 0x01:
+				stValue = limitVolumeStep(stValue, currentVolume);		
+				//currentVolume = stValue;
 			break;
-			case '02':
-				currentVolume2 = stValue;
+			case 0x02:
+				stValue = limitVolumeStep(stValue, currentVolume2);		
+				//currentVolume2 = stValue;
 			break;
 		}
 		break;
@@ -726,18 +731,16 @@ function lookupRx(Rx_Cc, Rx_Data, Rx_Zn, Mode, Rx_Dl) { //look up data required 
 
 	case "Volume":
 		stateVal1 = parseInt(stateVal1, 16);
-		switch (Rx_Zn)
+	switch (Rx_Zn)
 		{
 			case '01':
-				stateVal1 = limitVolumeStep(stateVal1, currentVolume);
 				currentVolume = stateVal1;
 			break;
 			case '02':
-				stateVal1 = limitVolumeStep(stateVal1, currentVolume2);
 				currentVolume2 = stateVal1;
 			break;
 		}
-		break;
+	break;
 	case "Tone":
 		var toneRaw = parseInt(stateVal1, 16);
 		if (0 <= toneRaw && toneRaw <= 15) {
@@ -895,7 +898,7 @@ function searchList(listName, param1, offset1, param2a, param2b, offset2, param3
 		compare3 = listName[i][offset3];
 		if ((compare1 === param1) && ((compare2 == param2a) || (compare2 == param2b)) && (compare3.indexOf(param3) > -1)) {
 			return listName[i]
-		} // "{} um return ergänzt. entfernen, falls es hier hakt. evtl ist auch das ";" nun überflüssig
+		}
 	}
 	return '';
 }
@@ -920,13 +923,9 @@ function connectToArcam(host) {
 		}, function () {
 			adapter.log.debug("adapter connected to ARCAM-AVR: " + host + ":" + "50000");
 		});
-	adapter.setState("arcamSystem.Info.Connected", {
-		val: 1,
-		ack: true
-	});
-	//var connecting = false;
 	connecting = false;
-	autoRequest();
+	adapter.log.debug(host + ":" + port);
+	//autoRequest();
 	
 	function restartConnection() {
 		adapter.log.warn("function restart connection called");
@@ -950,6 +949,14 @@ function connectToArcam(host) {
 	// probieren, ob man das nachfolgende nicht aus der function connectToArcam ausgliedern kann
 	//
 
+	socketAVR.on('connect', function() {
+		autoRequest();
+		adapter.setState("arcamSystem.Info.Connected", {
+		val: 1,
+		ack: true
+	});
+	});
+	
 	socketAVR.on('error', restartConnection);
 
 	socketAVR.on('close', restartConnection);
@@ -972,13 +979,6 @@ function connectToArcam(host) {
 			var Rx_Zn = response[i].substr(2, 2); //Zone
 			var Rx_Cc = response[i].substr(4, 2); //CommandCode
 			var Rx_Ac = response[i].substr(6, 2); //AnswerCode
-			/*
-			var Rx_Dl_Hex = response[i].substr(8, 2); //DataLength Hex: Anzahl der Bytes
-			var Rx_Dl_Chr = 2 * parseInt(Rx_Dl_Hex, 16); //DataLength Chr: Anzahl der Zeichen
-			var Rx_Data = response[i].substr(10, Rx_Dl_Chr); //Data
-			var Rx_Et = response[i].substr(10+(Rx_Dl_Chr), 2); //End Transmission
-			 */
-			// Alternativ um die DL-Berechnung zu eliminieren. wenn geht, alles auf slice umstellen, der Einheitlichkeit halber
 			var Rx_Dl_Hex = response[i].substr(8, 2); //DataLength Hex: Anzahl der Bytes
 			var Rx_Dl_Chr = parseInt(Rx_Dl_Hex, 16); //DataLength Chr: Anzahl der Zeichen
 			var Rx_Data = response[i].slice(10, -2); //Data
@@ -992,8 +992,6 @@ function connectToArcam(host) {
 				var stateName;
 				var stateVal;
 				var zoneName;
-
-				//var lookupDataRx = lookupRx(Rx_Cc, Rx_Data, Rx_Zn, "Rx", Rx_Dl_Chr / 2);
 				var lookupDataRx = lookupRx(Rx_Cc, Rx_Data, Rx_Zn, "Rx", Rx_Dl_Chr);
 				if (lookupDataRx == null) {
 					adapter.log.debug("Message Code not implemented yet");
@@ -1067,9 +1065,10 @@ function hex2ascii(str1) { // convert HEX to ASCII
 	return str;
 }
 
+
+function fixSpecialCharacters(text) {
 // Arcam sends wrong german special characters (ÄÖÜäöüß). This is a workaround and can be deleted if Arcam fixes the text output
 // also other special characters are wrong (e.g. french), so additions to replacement table (see above) are welcome
-function fixSpecialCharacters(text) {
 	var snip;
 	var text2 = text + "";
 	var newText = "";
@@ -1128,11 +1127,10 @@ function FMdirectTune(directTuneFrequencyRaw) {
 	//250ms pause between IPdata is required for reliable operation.
 	//input can be: 97,3 97,30 97.3 97.30 9730 973 97:3 97:30
 
-	requestStatus('arcamFMtune.Frequency'); // überflüssig?
-	//var directTuneFrequency = directTuneFrequencyRaw; //holen directTune Frequenz von State,  umwandeln in 4-stellig Dezimal ohne Trennzeichen / prüfen ob >= 8750 und <= 10800
-	var directTuneFrequency = S(directTuneFrequencyRaw).strip(' ', '_', ',', '.', ':').s;
-	var directTuneFrequencyChr1 = S(directTuneFrequency).left(1).s;
-	switch (directTuneFrequencyChr1) {
+	requestStatus('arcamTuner.FM.Tune.Frequency'); // überflüssig?
+	var directTuneFrequency = S(directTuneFrequencyRaw).strip(' ', '_', ',', '.', ':').s; // strip delimiters
+	var directTuneFrequencyChr1 = S(directTuneFrequency).left(1).s; // get first digit
+	switch (directTuneFrequencyChr1) { // define length based on 1st character
 		case '8':
 		case '9':
 			var freqLength = 4;
@@ -1143,16 +1141,16 @@ function FMdirectTune(directTuneFrequencyRaw) {
 			break;
 	}
 	directTuneFrequency = S(directTuneFrequency).padRight(freqLength, 0).s;
-	directTuneFrequency = parseInt(directTuneFrequency, 10);
+	directTuneFrequency = parseInt(directTuneFrequency, 10); // convert to Integer
 	
-	var currentFrequency = S(currentFrequencyStr).strip(' ', '_', ',', '.', ':', 'MHz').s;
-	currentFrequency = parseInt(currentFrequencyStr, 10);
+	var currentFrequency = S(currentFrequencyStr).strip(' ', '_', ',', '.', ':', 'MHz').s; // strip delimiters
+	currentFrequency = parseInt(currentFrequencyStr, 10);  // convert to Integer
 
-	if ((directTuneFrequency < 8750) || (directTuneFrequency > 10800)) {
+	if ((directTuneFrequency < 8750) || (directTuneFrequency > 10800)) { // check if in allowed range
 		adapter.log.debug("invalid Tuning Frequency");
 		return;
 	}
-	if (directTuneFrequency == currentFrequency) {
+	if (directTuneFrequency == currentFrequency) { // check if no change
 		adapter.log.debug("No Frequency Change");
 		return;
 	}
@@ -1207,11 +1205,11 @@ function tuneFM(FMzone, tuningSteps, tuningDirection) {
 
 
 function limitVolumeStep(targetVol, currentVol){
-// limits the maximum (positive) volume step to xdB, defined by stepLimit. Avoids accidental increases and potential damage to speakers
-var stepLimit = 10; //e.g. 10dB max step
-if ((targetVol - currentVol) > stepLimit){
+// limits the maximum (positive) volume step to xdB, defined by volumeStepLimit. Avoids accidental increases and potential damage to speakers
+// var volumeStepLimit = 10; //e.g. 10dB max step
+if ((targetVol - currentVol) > volumeStepLimit){
 	adapter.log.debug('Target Volume: ' + targetVol + "/" + 'Current Volume: ' + currentVol);
-	var filteredVolume = currentVol + stepLimit;
+	var filteredVolume = currentVol + volumeStepLimit;
 	adapter.log.debug('Filtered Volume: ' + filteredVolume);
 	} else {
 	var filteredVolume = targetVol;
@@ -1220,8 +1218,17 @@ return filteredVolume;
 }
 
 function main() {
+	
 	adapter.log.debug("adapter.main: << MAIN >>");
-	var host = adapter.config.host;
+	host = adapter.config.host;
+	port = 	adapter.config.port;
+	qtyTunerPresets = parseInt(adapter.config.qtyTunerPresets);
+	volumeStepLimit = parseInt(adapter.config.volumeStepLimit);
+	smoothVolRiseTime = parseInt(adapter.config.smoothVolRiseTime);
+	smoothVolFallTime = parseInt(adapter.config.smoothVolFallTime);
+	softMuteRiseTime = parseInt(adapter.config.softMuteRiseTime);
+	softMuteFallTime = parseInt(adapter.config.softMuteFallTime);
+	stepMuteAttenuation = parseInt(adapter.config.stepMuteAttenuation);
 	connectToArcam(host);
 	createStatesIfNotExist(arcamPresetStateList, 'r');
 	createStatesIfNotExist(arcamStateList, 'wr');

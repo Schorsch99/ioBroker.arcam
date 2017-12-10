@@ -1,6 +1,6 @@
 {
   "name": "iobroker.arcam",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "iobroker adapter for Arcam AVRs",
   "main": "arcam.js",
   "dependencies": {},
