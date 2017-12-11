@@ -106,7 +106,7 @@ var lookupTable = [
 	['arcamAudio.DolbyLeveller.Ctl_Up', 1, 'TxCtl', '39', 'f1', 'f1', 'Discrete', 1, 'wr'],
 	['arcamAudio.DolbyLeveller.Ctl_Down', 1, 'TxCtl', '39', 'f2', 'f2', 'Discrete', 1, 'wr'],
 	
-	['arcamDisplay.FrontPanel.Brightness', 'Display Off', 'Rx', '01', '00', '00', 'Discrete', 1, '0'],
+	['arcamDisplay.FrontDisplay.Brightness', 'Display Off', 'Rx', '01', '00', '00', 'Discrete', 1, '0'],
 	['arcamDisplay.FrontDisplay.Brightness', 'Display L1', 'Rx', '01', '01', '01', 'Discrete', 1, '0'],
 	['arcamDisplay.FrontDisplay.Brightness', 'Display L2', 'Rx', '01', '02', '02', 'Discrete', 1, '0'],
 	['arcamDisplay.FrontDisplay.Brightness', 'Req', 'Req', '01', 'f0', 'f0', 'Discrete', 1, 'wr'],
@@ -114,6 +114,8 @@ var lookupTable = [
 	['arcamDisplay.FrontDisplay.Brightness',	'Display L1',	'Tx',	'08',	'1022',		'1022',		'Discrete', 1,		'0'],
 	['arcamDisplay.FrontDisplay.Brightness', 'Display L2',	'Tx', 	'08', 	'1023', 	'1023', 	'Discrete', 1, 		'0'],
 
+	['arcamDisplay.FrontDisplay.InfoType', 'VALUE', 'TxRx', '09', 'VALUE', 'VALUE', 'Special', 2, '0'],
+	['arcamDisplay.FrontDisplay.InfoType', 'Req', 'Req', '09', 'f0', 'f0', 'Special', 2, 'wr'],
 	
 	['arcamTuner.DAB.Info.DLS_PDT_Info', 'VALUE', 'Rx', '1a', 'VALUE', 'VALUE', 'ASCII', 1, '0'],
 	['arcamTuner.DAB.Info.DLS_PDT_Info', 'Req', 'Req', '1a', 'f0', 'f0', 'Discrete', 1, 'wr'],
@@ -252,6 +254,8 @@ var lookupTable = [
 	['arcamSystem.Info.Connected', 'VALUE', 'Tx', 'ff', 'ff', 'ff', 'Discrete', 1, 'wr'],
 	['arcamSystem.Info.Connected', 'VALUE', 'Tx', 'ff', 'ff', 'ff', 'Discrete', 1, 'wr'],
 	
+	['arcamAudio.Info.NetworkPlayback.Status', 'VALUE', 'Rx', '1c', 'VALUE', 'VALUE', 'Special', 1, '0'],
+	['arcamAudio.Info.NetworkPlayback.Status', 'Req', 'Req', '1c', 'f0', 'f0', 'Discrete', 1, 'wr'],
 	
 ];
 
@@ -341,6 +345,22 @@ var stringReplacementTable = [
 	['Ö', 'Oe', '??', 'd6'],
 	['Ü', 'Ue', '??', 'dc'],
 	['ß', 'ss', '8d', 'df'],
+];
+
+var displayInfoTypeTable = [
+	['Processing Mode', '00', 'FM_DAB_NET/USB'	],
+	['Cycle',			'e0', 'FM_DAB_NET/USB'	],
+	['Radio Text',		'01', 'FM_DAB'			],
+	['Track',			'01', 'NET/USB'			],
+	['Program Type',	'02', 'FM'				],
+	['Genre',			'02', 'DAB'				],
+	['Artist',			'02', 'NET/USB'			],
+	['Signal Strength',	'03', 'FM'				],
+	['Signal Quality',	'03', 'DAB'				],
+	['Album',			'03', 'NET/USB'			],
+	['Bit Rate',		'04', 'DAB'				],
+	['Audio Type',		'04', 'NET/USB'			],
+	['Rate',			'05', 'NET/USB' 		],
 ];
 
 var arcamStateList = create_arcamStateList(lookupTable); //create arcamStateList containing only the singular Statenames from lookupTable
@@ -436,7 +456,7 @@ function sendIP(Tx_Zn, Tx_Cc, kannEntfallen/*Tx_Dl*/, Tx_Data_Str) { //send IP b
 			var byteStart = 2 * z;
 			var strSlice = Tx_Data_Str.slice(byteStart, byteStart + 2);
 			var writeData = parseInt(strSlice, 16);
-			adapter.log.debug('writeData: ' + writeData);
+			// adapter.log.debug('writeData: ' + writeData);
 			buffer.writeUInt8(writeData, 4 + z);
 
 		}
@@ -665,7 +685,6 @@ function lookupTx(stName, stValue, zone, Mode, Egal) { //look up data required t
 		if (stName == "arcamAudio.Subwoofer.Trim"){
 			stValue = stValue * 2; // compensation for 0.5dB steps
 		}
-		adapter.log.debug("send tone: " + stValue);
 		break;
 	default:
 		break;
@@ -752,7 +771,6 @@ function lookupRx(Rx_Cc, Rx_Data, Rx_Zn, Mode, Rx_Dl) { //look up data required 
 		if (stateName1 == "arcamAudio.Subwoofer.Trim"){
 			stateVal1 = stateVal1 / 2; // only 0,5dB steps as opposed to bass, treble, etc.
 		}
-		adapter.log.debug("Tone: " + stateVal1);
 		break;
 
 		case "Special":
@@ -872,14 +890,47 @@ function lookupRx(Rx_Cc, Rx_Data, Rx_Zn, Mode, Rx_Dl) { //look up data required 
 			stateVal1 = data2frequencyStr(currentMHz, currentkHz, 'string');
 			break;
 
-		default:
+		case "arcamDisplay.FrontDisplay.InfoType":
+			var Data1 = stateVal1;
+			switch (Rx_Zn)
+			{
+				case '01':
+					var activeInput = currentInput;
+				break;
+				case '02':
+					var activeInput = currentInput2;
+				break;
+			}
+			var lookupData = searchList(displayInfoTypeTable, Data1, 1, Data1, Data1, 1, activeInput, 2);
+			stateVal1 = lookupData[0];
 			break;
-
-		}
-	default:
+		
+		case "arcamAudio.Info.NetworkPlayback.Status":
+			var Data1 = stateVal1.slice(0, 2);
+			var Data2 = stateVal1.slice(2);
+			switch (Data1)
+			{
+				case '00':
+					stateVal1 = "Navigating";
+					break;
+				case '01':
+					stateVal1 = "Playing";
+					break;
+				case '02':
+					stateVal1 = "Paused";
+					break;
+				case '03':
+					stateVal1 = "Busy";
+					break;
+				default:
+					break;
+			}
+			stateVal1 = stateVal1 + " " + hex2ascii(Data2);
+			break;
+		default:
 		break;
 	}
-
+	}
 	if (Rx_Zn == 0x02) {
 		stateName1 = stateName1 + '2'
 	};
@@ -924,7 +975,7 @@ function connectToArcam(host) {
 			adapter.log.debug("adapter connected to ARCAM-AVR: " + host + ":" + "50000");
 		});
 	connecting = false;
-	adapter.log.debug(host + ":" + port);
+	//adapter.log.debug(host + ":" + port);
 	//autoRequest();
 	
 	function restartConnection() {
@@ -1084,15 +1135,6 @@ function fixSpecialCharacters(text) {
 	return newText;
 }
 
-function subcribeStates(List) { // subscribe to required states
-	var i = 0;
-	for (i = 0; i < List.length; i++) {
-		var stateForSubscription = List[i];
-		adapter.subscribeStates(stateForSubscription);
-		adapter.log.debug(stateForSubscription);
-	}
-}
-
 function createStatesIfNotExist(List, ReadWrite) { // create states if they do not exist yet
 	var readable = false;
 	var writable = false;
@@ -1147,7 +1189,7 @@ function FMdirectTune(directTuneFrequencyRaw) {
 	currentFrequency = parseInt(currentFrequencyStr, 10);  // convert to Integer
 
 	if ((directTuneFrequency < 8750) || (directTuneFrequency > 10800)) { // check if in allowed range
-		adapter.log.debug("invalid Tuning Frequency");
+		adapter.log.debug("Invalid Tuning Frequency");
 		return;
 	}
 	if (directTuneFrequency == currentFrequency) { // check if no change
@@ -1197,7 +1239,6 @@ function tuneFM(FMzone, tuningSteps, tuningDirection) {
 		} else {
 			sendIP(FMzone, '16', 0x01, tuningDirectionData);
 			i++;
-			adapter.log.debug("counter= " + i);
 		}
 		setTimeout(sendTuneCommand, 250);
 	}, 250);
@@ -1208,9 +1249,9 @@ function limitVolumeStep(targetVol, currentVol){
 // limits the maximum (positive) volume step to xdB, defined by volumeStepLimit. Avoids accidental increases and potential damage to speakers
 // var volumeStepLimit = 10; //e.g. 10dB max step
 if ((targetVol - currentVol) > volumeStepLimit){
-	adapter.log.debug('Target Volume: ' + targetVol + "/" + 'Current Volume: ' + currentVol);
+	//adapter.log.debug('Target Volume: ' + targetVol + "/" + 'Current Volume: ' + currentVol);
 	var filteredVolume = currentVol + volumeStepLimit;
-	adapter.log.debug('Filtered Volume: ' + filteredVolume);
+	//adapter.log.debug('Filtered Volume: ' + filteredVolume);
 	} else {
 	var filteredVolume = targetVol;
 }

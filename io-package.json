@@ -1651,6 +1651,34 @@
 			}
 		},
 		{
+			"_id": "arcamDisplay.FrontDisplay.InfoType",
+			"type": "state",
+			"common": {
+				"name": "arcamDisplay.FrontDisplay.InfoType",
+				"desc": "arcamDisplay.FrontDisplay.InfoType",
+				"type": "string",
+				"read": true,
+				"write": true
+			},
+			"native": {
+				
+			}
+		},
+		{
+			"_id": "arcamAudio.Info.NetworkPlayback.Status",
+			"type": "state",
+			"common": {
+				"name": "arcamAudio.Info.NetworkPlayback.Status",
+				"desc": "arcamAudio.Info.NetworkPlayback.Status",
+				"type": "string",
+				"read": true,
+				"write": false
+			},
+			"native": {
+				
+			}
+		},
+		{
 			"_id": "arcamTuner.DAB.Info.DLS_PDT_Info",
 			"type": "state",
 			"common": {
