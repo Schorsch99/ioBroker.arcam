@@ -1,26 +1,67 @@
 {
-  "name": "iobroker.arcam",
-  "version": "0.0.2",
-  "description": "iobroker adapter for Arcam AVRs",
-  "main": "arcam.js",
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "type": "remote"
+      },
+      "/"
+    ]
+  ],
+  "_from": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+  "_id": "iobroker.arcam@0.0.3",
+  "_inCache": true,
+  "_location": "/iobroker.arcam",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+    "spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+    "type": "remote"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+  "_shasum": "a2fdd11dd932eff695bbcbe89f7ad6411b41d857",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+  "_where": "/",
+  "author": {
+    "name": "Schorsch99"
+  },
+  "bugs": {
+    "url": "https://github.com/Schorsch99/iobroker.arcam/issues"
+  },
   "dependencies": {},
+  "description": "iobroker adapter for Arcam AVRs",
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Schorsch99/iobroker.arcam.git"
-  },
+  "homepage": "https://github.com/Schorsch99/iobroker.arcam#readme",
   "keywords": [
     "iobroker",
     "adapter",
     "arcam"
   ],
-  "author": "Schorsch99",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Schorsch99/iobroker.arcam/issues"
+  "main": "arcam.js",
+  "name": "iobroker.arcam",
+  "optionalDependencies": {},
+  "readme": "![Logo](img/arcam.png)\n# ioBroker.arcam\n\nThis adapter allows control of ARCAM AVRs via TCP/IP using port 50000.\n\nStill buggy and missing error handling.\n\nCurrently the most important features are implemented, I have used the following Arcam-document as a reference:\n\n* RS232_860_850_550_390_250_SH274E_C_091116.pdf\n\nThis file is available for download on the Arcam website.\n\n## Additional Features:\n\n### Autocreation of states\n\nOn startup the adapter checks if the required states exist, if not, these are created by the script.\n\n### Autorequest\nAfter verifying/creating the states and after each connect, update requests are sent to the AVR for all implemented states.\n\nEvery State with \"Ctl_\" in the statename is intended to be used with a pushbutton or text widget, e.g. \"arcamAudio.Tone.Treble.Ctl_Up\" to increment the treble level by 1dB each time the button is activated. \n\n### Direct FM Tuning\nArcam does not offer a direct tune feature for FM, neither via remote control, nor via IP command.\nI have implemented a function to \"simulate\" direct tuning.\nEntering an FM frequency into a text widget connected to the state \"arcamTuner.FM.Tune.Ctl_DirectTune\" will start the tuning to reach the target frequency.\nThe target frequency can be entered with or without delimiter and with or without trailing \"0\".\nUnfortunately the ARCAM only allows tuning in 0.05 MHz steps and needs time between IP-messages to react. Therefore the tuning process is rather slow, but still better than manual tuning via remote...\n\n### Limit Volume (increase) Steps\nVolume steps initiated through a script or via a Vis-Widget can be limited to a configurable number of decibels (Adapter Configuration dialog: default: 10 / disable with 100).\nThis means that any request for a single volume step exceeding 10dB will be limited to said 10dB.\nThis feature is useful to prevent accidentally blowing your speakers... \n\n### Smooth Volume\nSmooth Volume prevents rough volume steps by interpolating between current and target volume.\nnot implemented yet.\n\n### Soft Mute\nSimilar to Smooth Volume, but with target Volume \"0\" and resume to previous volume.\nnot implemented yet.\n\n### Step Mute\nDecreases Volume by a configurable number of decibels (Adapter Configuration dialog: default: 20 / disable with 100)\nnot implemented yet.\n\n### Autodiscover:\nnot implemented yet.\n\n\n\nThe implementation concentrates on the most important control functions. \n\n### 0.0.1\n* initial version\n\n### 0.0.2\narcam.js:\nclean up code and comments\nfix autoRequest\nfix Volume2\nfix Limit Volume (increase) Steps\nadd config parameters\n\nio-package.json:\nadd config parameters\n\nindex.html\nadd config parameters\n\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schorsch99/iobroker.arcam.git"
   },
-  "homepage": "https://github.com/Schorsch99/iobroker.arcam#readme"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.2"
 }
