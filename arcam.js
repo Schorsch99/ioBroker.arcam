@@ -11,11 +11,9 @@ var net = require('net');
 var S = require('string');
 var adapter = utils.adapter('arcam');
 var socketAVR = "";
-var stValue;
 var connecting;
 var host;
 var port;
-var qtyTunerPresets;
 var volumeStepLimit;
 var smoothVolRiseTime;
 var smoothVolFallTime;
@@ -30,7 +28,6 @@ var stateCache = {
 	currentFrequency: ""
 };
 var statesReady = 0;
-var statusRequestActive = 0;
 var errorMessage = "";
 var myObj_iO = configJSON.instanceObjects;
 var lookup_master = { // contains default values
@@ -56,14 +53,14 @@ var lookup_master = { // contains default values
 			step: 1
 		};
 
-var stringReplacementTable = [
-	['‰', 'ae', '91', 'e4'],
-	['ˆ', 'oe', '97', 'f6'],
-	['¸', 'ue', '99', 'fc'],
-	['ƒ', 'Ae', '??', 'c4'],
-	['÷', 'Oe', 'd7', 'd6'],
-	['‹', 'Ue', '??', 'dc'],
-	['ﬂ', 'ss', '8d', 'df']
+var stringReplacementTable = [ // [character - false code - correct code]
+	['√§', '91', 'e4'],
+	['√∂', '97', 'f6'],
+	['√º', '99', 'fc'],
+	['√Ñ', 'd1', 'c4'],
+	['√ñ', 'd7', 'd6'],
+	['√ú', '??', 'dc'],
+	['√ü', '8d', 'df']
 ];
 
 adapter.on('message', function (obj) {
@@ -88,43 +85,34 @@ adapter.on('stateChange', function (id, state) { //if adapter state changes do
 	var idStateName = S(id).strip(deleteStr).s; // remove string
 	
 	if (idStateName.indexOf(".Ctl") > -1) { // if stateName contains ".Ctl_" then change to Control handling
-		adapter.log.debug("ControlState change: " + idStateName + " " + state.val);
+//		adapter.log.debug("ControlState change: " + idStateName + " " + state.val);
 		var controlReturn = control(idStateName, state.val);
 	}
+
 	Tx_Block: {
 	if (controlReturn === 'exit') {
 		break Tx_Block;
 	}
-
 	var commMode = "Tx";
-	adapter.log.debug("State change: " + idStateName + " " + state.val);
-	
-
-
-var resultArrayTx = lookupTx(idStateName, state.val, commMode);
-
-
-if ((resultArrayTx[0])&&(resultArrayTx[1])&&(resultArrayTx[2])){
-	var Tx_Cc = resultArrayTx[0];
-	var Tx_Zn = resultArrayTx[1];
-	var Tx_Data_Str = resultArrayTx[2] + "";
-	sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str); // send Data
+//	adapter.log.debug("State change: " + idStateName + " " + state.val);
+	var resultArrayTx = lookupTx(idStateName, state.val, commMode);
+	if ((resultArrayTx[0])&&(resultArrayTx[1])&&(resultArrayTx[2])){
+		var Tx_Cc = resultArrayTx[0];
+		var Tx_Zn = resultArrayTx[1];
+		var Tx_Data_Str = resultArrayTx[2] + "";
+		sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str); // send Data
 	}
 	}
 });
 
-function lookupTx(idStateName, stateVal, commMode){		
-		
-		
+function lookupTx(idStateName, stateVal, commMode){ // lookup function for Outgoing Data		
 		var resultArrayLookupTx = [];
 		//var myObj_iO = configJSON.instanceObjects;
 		var matchTxData = 0;
-		
 		for (var element_iO in myObj_iO){
 			if (matchTxData === 1){
 				break;
 			}
-			
 			var myObj_common = myObj_iO[element_iO]["common"];		
 			if ((getTxRxValue(myObj_iO[element_iO], "_id", commMode) != idStateName) || (getTxRxValue(myObj_common, "Cc", commMode) === "error") ){
 				continue; // continue with next iteration if Zn or RxCc do not match or if "_id" does not exist
@@ -202,18 +190,6 @@ function lookupTx(idStateName, stateVal, commMode){
 				}	
 			}					
 		}		
-/*			var resultStateValue = "";
-			for (var m = 0; m < resultStateValueArray.length; m++){
-				resultStateValue += resultStateValueArray[m];
-			}
-			adapter.log.debug("Neue Auswertung ergibt: stateNameX= " + resultStateName + " stateValueX: " + resultStateValue);
-	
-			if (errorMessage != ""){
-				//adapter.log.debug("NEWERROR " + errorMessage);
-				errorMessage = ""; // Reset errorMessage
-			}
-			//	adapter.log.debug("NEW " + "stateNameX: " + resultStateName + " / " + "stateValueX: " + resultStateValue);
-*/
 resultArrayLookupTx[3] = errorMessage;
 return(resultArrayLookupTx);
 }
@@ -229,7 +205,6 @@ function control(idstateName, stateVal) {
 		return 'exit';
 		break;
 	case "arcamTest.Test1.Ctl_Test1": // temporary, for different test purposes only
-		requestStatus("wasserbaum");
 		return 'exit';
 		break;
 	default:
@@ -258,15 +233,14 @@ function sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str) { //send IP based on arguments
 	buffer.writeUInt8(Tx_Et, 4 + Tx_Dl);
 	if (connecting === false) {
 		socketAVR.write(buffer); // write Buffer to IP socket
-		adapter.log.debug("Gesendet wird: TxCc= " + Tx_Cc + " TxZn: " + Tx_Zn + " TxData: " + writeData);
+		//adapter.log.debug("Gesendet wird: TxCc= " + Tx_Cc + " TxZn: " + Tx_Zn + " TxData: " + writeData);
 		} else {
 		return "Tx error";
 	}
 
 }
 
-// ¸berarbeiten
-function requestStatus(requestSelect) { // valid arguments: [AMP / PRESET / ALL /specific state]
+function requestStatus(requestSelect) { // valid arguments: [* / specific state ]
 	var p = 0;
 	var stateArray = [];
 
@@ -291,7 +265,7 @@ function requestStatus(requestSelect) { // valid arguments: [AMP / PRESET / ALL 
 				}
 	} else {	
 	var q = 0;
-	adapter.log.debug(requestSelect);
+	//adapter.log.debug(requestSelect);
 	setTimeout(function requestLoopAMP() {
 		//for (var q = 0; q < stateArray.length; q++)
 		if (q < stateArray.length){
@@ -306,7 +280,6 @@ function requestStatus(requestSelect) { // valid arguments: [AMP / PRESET / ALL 
 				} else {
 					var Tx_Data_Str = resultArrayTx[2];
 				}
-				adapter.log.debug(stateArray[q] + " / " + Tx_Zn + " / " + Tx_Cc + " / " + Tx_Data_Str);
 				sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str); // send Data
 			}
 			q++;
@@ -330,10 +303,10 @@ function dataLengthMod2(data) { //determine Data length
 
 function connectToArcam(host) {
 	socketAVR = net.connect({
-			port: 50000,
+			port: port,
 			host: host
 		}, function () {
-			adapter.log.debug("adapter connected to ARCAM-AVR: " + host + ":" + "50000");
+			adapter.log.debug("adapter connected to ARCAM-AVR: " + host + ":" + port);
 		});
 	connecting = false;
 	//adapter.log.debug(host + ":" + port);
@@ -368,7 +341,7 @@ function connectToArcam(host) {
 		ack: true
 		});
 	});
-	autoRequest(); // temp disable
+	autoRequest();
 	
 	socketAVR.on('error', restartConnection);
 
@@ -380,9 +353,6 @@ function connectToArcam(host) {
 		var dataStr = data.toString('hex');
 		var byteLength = data.byteLength;
 		var response = dataStr.split("\r"); //adapter.log.info("data from " + adapter.config.host + ": *" + dataStr + "*");
-		//
-		// Response-Auswertung in eigene Funktion verschieben
-		//
 
 		for (var i = 0; i < response.length; i++) {
 			var Rx_St = response[i].substr(0, 2); //Start-Byte
@@ -390,34 +360,21 @@ function connectToArcam(host) {
 			var Rx_Cc = response[i].substr(4, 2); //CommandCode
 			var Rx_Ac = response[i].substr(6, 2); //AnswerCode
 			var Rx_Dl_Hex = response[i].substr(8, 2); //DataLength Hex: Anzahl der Bytes
-			//var Rx_Dl_Chr = parseInt(Rx_Dl_Hex, 16); //DataLength Chr: Anzahl der Zeichen
 			var Rx_Data = response[i].slice(10, -2); //Data
 			var Rx_Et = response[i].slice(-2); //End Transmission
 
-
-			adapter.log.debug("debug: *" + "Rx_St: " + Rx_St + " Rx_Zn: " + Rx_Zn + " Cc: " + Rx_Cc + " Rx_Ac: " + Rx_Ac + " Rx_Dl: " + Rx_Dl_Hex + " Rx_Data: " + Rx_Data + " Rx_Et:" + Rx_Et + "* ");
+			adapter.log.debug("Message Received: <<< Rx_Zn: " + Rx_Zn + " Cc: " + Rx_Cc + " Rx_Ac: " + Rx_Ac + " Rx_Dl: " + Rx_Dl_Hex + " Rx_Data: " + Rx_Data + " >>>");
 
 			if (Rx_St == "21" && Rx_Et == "0d") // Check Start- and EndByte
 			{
 
-	var commMode = "Rx";
-	var RxCc = Rx_Cc; //tempor‰re Zuweisung)
-	var RxZn = Rx_Zn; //tempor‰re Zuweisung)
-	var RxData = Rx_Data; //tempor‰re Zuweisung)
-	var resultStateValueArray = [];			
-	
-	var resultArrayRx = lookupRx(Rx_Cc, Rx_Zn, Rx_Data, commMode);
-
-
+			var commMode = "Rx";
+			var resultStateValueArray = [];			
+			var resultArrayRx = lookupRx(Rx_Cc, Rx_Zn, Rx_Data, commMode);
 			var stateVal = "";
 			for (var m = 1; m < resultArrayRx.length; m++){
 				stateVal += resultArrayRx[m];
 			}
-			/*if (errorMessage != ""){
-				adapter.log.debug("NEWERROR " + errorMessage);
-				errorMessage = ""; // Reset errorMessage
-			}*/
-	
 			var zoneName;
 			var stateName = resultArrayRx[0]
 			var stateName2;
@@ -491,7 +448,7 @@ function connectToArcam(host) {
 	
 }
 
-function lookupRx(RxCc, RxZn, RxData, commMode){
+function lookupRx(RxCc, RxZn, RxData, commMode){ // lookup function for Incoming Data
 
 //	foo2:{		
 		var resultArrayLookupRx = [];
@@ -559,20 +516,6 @@ function lookupRx(RxCc, RxZn, RxData, commMode){
 			}		
 	return resultArrayLookupRx;	
 	}
-
-
-
-
-
-
-function getExistingObjectValues(masterObj, fetchObj){
-	for (var key in masterObj){
-		if (typeof fetchObj[key] != "undefined"){
-			masterObj[key] = fetchObj[key];
-		}
-	}
-	return masterObj;
-}
 
 function dataConversion(input, lookupStateValue, encoding, min, max, step, direction, TxData, Zone){
 	var output;
@@ -695,8 +638,6 @@ function dataConversion(input, lookupStateValue, encoding, min, max, step, direc
 			return output;
 }
 
-
-
 function dataSplit(dataToBeSplit, dataStart, dataLength){
 	var sliceStart = 2 * dataStart; // conversion bytes in String characters
 	switch(true)
@@ -738,17 +679,25 @@ function getValue(path, key, errorReturn){ // return value from path[key]
 	}
 }
 
+function getExistingObjectValues(masterObj, fetchObj){
+	for (var key in masterObj){
+		if (typeof fetchObj[key] != "undefined"){
+			masterObj[key] = fetchObj[key];
+		}
+	}
+	return masterObj;
+}
+
 function autoRequest(){
 setTimeout(function autoReq() {
 		if (statesReady == 1){
 		adapter.log.debug("verification of states completed - starting autoRequest");
-		requestStatus('ALL'); // noch ‰ndern in ALL, wenn funktioniert
+		requestStatus('ALL'); // noch √§ndern in ALL, wenn funktioniert
 		} else {
 		setTimeout(autoReq(), 500);
 		}
 	}, 2000);
 }
-
 
 function hex2ascii(str1) { // convert HEX to ASCII
 	var hex = str1.toString();
@@ -762,7 +711,6 @@ function hex2ascii(str1) { // convert HEX to ASCII
 	return str;
 }
 
-
 function ascii2hex(str1){ // convert ASCII to HEX
 	var arr1 = [];
 	for (var n = 0, l = str1.length; n < l; n ++) 
@@ -774,7 +722,7 @@ function ascii2hex(str1){ // convert ASCII to HEX
    }
 
 function fixSpecialCharacters(text) { // correction for Umlaute
-// Arcam sends wrong german special characters (ƒ÷‹‰ˆ¸ﬂ). This is a workaround and can be deleted if Arcam fixes the text output
+// Arcam sends wrong german special characters (√Ñ√ñ√ú√§√∂√º√ü). This is a workaround and can be deleted if Arcam fixes the text output
 // also other special characters are wrong (e.g. french), so additions to replacement table (see above) are welcome
 	var snip;
 	var text2 = text + "";
@@ -782,8 +730,8 @@ function fixSpecialCharacters(text) { // correction for Umlaute
 	for (var i = 0; i < text2.length; i = i + 2) {
 		snip = text2.substring(i, i + 2);
 		for (var j = 0; j < stringReplacementTable.length; j++) {
-			var searchStr = stringReplacementTable[j][2];
-			var replaceStr = stringReplacementTable[j][3];
+			var searchStr = stringReplacementTable[j][1];
+			var replaceStr = stringReplacementTable[j][2];
 			snip = snip.replace(searchStr, replaceStr);
 		}
 		newText = newText + snip;
@@ -803,7 +751,6 @@ function createStatesIfNotExist() { // create states if they do not exist yet
 		let read_common = getValue(myObj_common, "read", "");
 		let write_common = getValue(myObj_common, "write", "");
 		let desc_common = getValue(myObj_common, "desc", "");
-		adapter.log.debug(id_iO);
 		adapter.setObjectNotExists(id_iO, {
 			type: type_iO,
 				common: {
@@ -820,14 +767,12 @@ function createStatesIfNotExist() { // create states if they do not exist yet
 }
 
 // Additional Functions
-
-
 function FMdirectTune(directTuneFrequencyRaw) {
 	// FMdirectTune: calculates shortest delta between current and directTuneFrequency, determines direction and number of steps (0.05MHz per step) and sends IP accodingly.
 	//250ms pause between IPdata is required for reliable operation.
 	//input can be: 97,3 97,30 97.3 97.30 9730 973 97:3 97:30
 
-	requestStatus('arcamTuner.FM.Tune.Frequency'); // ¸berfl¸ssig?
+	requestStatus('arcamTuner.FM.Tune.Frequency'); // √ºberfl√ºssig?
 	var directTuneFrequency = S(directTuneFrequencyRaw).strip(' ', '_', ',', '.', ':').s; // strip delimiters
 	var directTuneFrequencyChr1 = S(directTuneFrequency).left(1).s; // get first digit
 	switch (directTuneFrequencyChr1) { // define length based on 1st character
@@ -926,7 +871,6 @@ function main() {
 	}*/
 	host = adapter.config.host;
 	port = adapter.config.port;
-	qtyTunerPresets = parseInt(adapter.config.qtyTunerPresets, 10);
 	volumeStepLimit = parseInt(adapter.config.volumeStepLimit, 10);
 	smoothVolRiseTime = parseInt(adapter.config.smoothVolRiseTime, 10);
 	smoothVolFallTime = parseInt(adapter.config.smoothVolFallTime, 10);
@@ -940,19 +884,19 @@ function main() {
 }
 
 /*
-Ger¸st autodetect
+Ger√ºst autodetect
 function autodetect(){
-hol basis IP von iobroker-ger‰t
+hol basis IP von iobroker-ger√§t
 ping alles von *.001 beginnend
-wenn ping, dann sende ìAMX\rî (wie auch immer...)
-bis response:  ìAMXB<Device-SDKClass=Receiver><Device-Make=ARCAM><Device-Model=AV860><Device-Revision=x.y.z>\rî
+wenn ping, dann sende ‚ÄúAMX\r‚Äù (wie auch immer...)
+bis response:  ‚ÄúAMXB<Device-SDKClass=Receiver><Device-Make=ARCAM><Device-Model=AV860><Device-Revision=x.y.z>\r‚Äù
 merke IP und stelle diese eindeutig
-auswerten response um Ger‰tetyp anzeigen zu kˆnnen (nice to have)
+auswerten response um Ger√§tetyp anzeigen zu k√∂nnen (nice to have)
 }
 */
 
 /*
-Ger¸st DLD_PDT- sowie RDS-History
+Ger√ºst DLD_PDT- sowie RDS-History
 globale Variablen anlegen:
 - radioText + State anlegen
 - radioText_latest
@@ -981,9 +925,9 @@ setState radioText
 */
 
 /*
-Ger¸st SoftVolume (alles auch f¸r die 2. Zone auslegen, mit Ausnahme der Relaisaktivierung bei Mute in Zone2)
-Einf¸hren globale Variable stateCache.currentVolume und stateCache.currentVolume2, wird bei Volume‰nderung laufend aktualisiert
-Einf¸hren globale Variable volumeMemory und volumeMemory2, wird nur zu Beginn eines Ramp-Vorgangs beschrieben
+Ger√ºst SoftVolume (alles auch f√ºr die 2. Zone auslegen, mit Ausnahme der Relaisaktivierung bei Mute in Zone2)
+Einf√ºhren globale Variable stateCache.currentVolume und stateCache.currentVolume2, wird bei Volume√§nderung laufend aktualisiert
+Einf√ºhren globale Variable volumeMemory und volumeMemory2, wird nur zu Beginn eines Ramp-Vorgangs beschrieben
 
 Konfiguration: softVolumeRampTime // '0' = OFF
 Konfiguration: softMuteRampTime // '0' = OFF
@@ -996,20 +940,20 @@ SoftVolume: hole stateCache.currentVolume & targetVolume
 
 volumeMemory = stateCache.currentVolume // define startlevel // to memorize last "normal" volume for later resume
 numberOfSteps = Runden (rampTime / requiredMessageDelay); // determine no of Steps based on desired ramp time and required message delay time
-an dieser Stelle rampTime je nach aktivierter Funktion w‰hlen (softMute oder softVolume)
+an dieser Stelle rampTime je nach aktivierter Funktion w√§hlen (softMute oder softVolume)
 
-softVolumeStep = Runden((targetVolume - stateCache.currentVolume) / numberOfSteps) // aktuelle Lautst‰rke und runde auf Ganzahl(5 Schritte als Beispiel, ausprobieren was gut geht)
+softVolumeStep = Runden((targetVolume - stateCache.currentVolume) / numberOfSteps) // aktuelle Lautst√§rke und runde auf Ganzahl(5 Schritte als Beispiel, ausprobieren was gut geht)
 
 softVolumeLevel = stateCache.currentVolume // define startlevel
-von 1 bis (numberOfSteps - 1 ) sende softVolumeVolume = (softVolumeLevel + softVolumeStep) // wenn softVolumeStep negativ: reduzierung, sonst erhˆhung
+von 1 bis (numberOfSteps - 1 ) sende softVolumeVolume = (softVolumeLevel + softVolumeStep) // wenn softVolumeStep negativ: reduzierung, sonst erh√∂hung
 bei erreichen numberOfSteps sende targetVolume // to compensate for rounding errors
-nur bei Mute und nur f¸r Zone1 Lautsprecherrelais aktivieren
+nur bei Mute und nur f√ºr Zone1 Lautsprecherrelais aktivieren
 Gimmick nur bei muteFixedLevel: Display blinken lassen
 
-bei MuteOff das ganze r¸ckw‰rts
+bei MuteOff das ganze r√ºckw√§rts
 
 
-Mˆgliche Fallstricke: evtl. m¸ssen w‰hrend Ramp die emfangenen Volume messages ignoriert werden
+M√∂gliche Fallstricke: evtl. m√ºssen w√§hrend Ramp die emfangenen Volume messages ignoriert werden
 
 */
 
