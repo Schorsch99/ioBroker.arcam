@@ -5,7 +5,7 @@
 		"title": "Arcam AVR Adapter",
 		"desc": {
 			"en": "Controls Arcam AVR390/550/850/AV860/SR250 via network",
-			"de": "Steuert Arcam AVR390/550/850/AV860/SR250 über das Netzwerk"
+			"de": "Steuert Arcam AVR390/550/850/AV860/SR250 Ã¼ber das Netzwerk"
 			},
 		"platform": "Javascript/Node.js",
 		"mode": "daemon",
@@ -2555,7 +2555,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.01.Band",
 				"desc": "arcamTuner.Preset.01.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2581,7 +2583,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.02.Band",
 				"desc": "arcamTuner.Preset.02.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2606,7 +2610,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.03.Band",
 				"desc": "arcamTuner.Preset.03.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2631,7 +2637,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.04.Band",
 				"desc": "arcamTuner.Preset.04.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2656,7 +2664,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.05.Band",
 				"desc": "arcamTuner.Preset.05.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2681,7 +2691,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.06.Band",
 				"desc": "arcamTuner.Preset.06.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2706,7 +2718,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.07.Band",
 				"desc": "arcamTuner.Preset.07.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2731,7 +2745,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.08.Band",
 				"desc": "arcamTuner.Preset.08.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2756,7 +2772,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.09.Band",
 				"desc": "arcamTuner.Preset.09.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2781,7 +2799,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.10.Band",
 				"desc": "arcamTuner.Preset.10.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2806,7 +2826,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.11.Band",
 				"desc": "arcamTuner.Preset.11.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2831,7 +2853,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.12.Band",
 				"desc": "arcamTuner.Preset.12.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2856,7 +2880,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.13.Band",
 				"desc": "arcamTuner.Preset.13.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2881,7 +2907,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.14.Band",
 				"desc": "arcamTuner.Preset.14.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2906,7 +2934,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.15.Band",
 				"desc": "arcamTuner.Preset.15.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2931,7 +2961,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.16.Band",
 				"desc": "arcamTuner.Preset.16.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2956,7 +2988,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.17.Band",
 				"desc": "arcamTuner.Preset.17.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -2981,7 +3015,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.18.Band",
 				"desc": "arcamTuner.Preset.18.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3006,7 +3042,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.19.Band",
 				"desc": "arcamTuner.Preset.19.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3031,7 +3069,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.20.Band",
 				"desc": "arcamTuner.Preset.20.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3056,7 +3096,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.21.Band",
 				"desc": "arcamTuner.Preset.21.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3081,7 +3123,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.22.Band",
 				"desc": "arcamTuner.Preset.22.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3106,7 +3150,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.23.Band",
 				"desc": "arcamTuner.Preset.23.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3131,7 +3177,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.24.Band",
 				"desc": "arcamTuner.Preset.24.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3156,7 +3204,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.25.Band",
 				"desc": "arcamTuner.Preset.25.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3181,7 +3231,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.26.Band",
 				"desc": "arcamTuner.Preset.26.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3206,7 +3258,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.27.Band",
 				"desc": "arcamTuner.Preset.27.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3231,7 +3285,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.28.Band",
 				"desc": "arcamTuner.Preset.28.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3256,7 +3312,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.29.Band",
 				"desc": "arcamTuner.Preset.29.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3281,7 +3339,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.30.Band",
 				"desc": "arcamTuner.Preset.30.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3306,7 +3366,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.31.Band",
 				"desc": "arcamTuner.Preset.31.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3331,7 +3393,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.32.Band",
 				"desc": "arcamTuner.Preset.32.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3356,7 +3420,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.33.Band",
 				"desc": "arcamTuner.Preset.33.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3381,7 +3447,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.34.Band",
 				"desc": "arcamTuner.Preset.34.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3406,7 +3474,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.35.Band",
 				"desc": "arcamTuner.Preset.35.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3431,7 +3501,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.36.Band",
 				"desc": "arcamTuner.Preset.36.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3456,7 +3528,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.37.Band",
 				"desc": "arcamTuner.Preset.37.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3481,7 +3555,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.38.Band",
 				"desc": "arcamTuner.Preset.38.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3506,7 +3582,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.39.Band",
 				"desc": "arcamTuner.Preset.39.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3531,7 +3609,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.40.Band",
 				"desc": "arcamTuner.Preset.40.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3556,7 +3636,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.41.Band",
 				"desc": "arcamTuner.Preset.41.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3581,7 +3663,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.42.Band",
 				"desc": "arcamTuner.Preset.42.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3606,7 +3690,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.43.Band",
 				"desc": "arcamTuner.Preset.43.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3631,7 +3717,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.44.Band",
 				"desc": "arcamTuner.Preset.44.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3656,7 +3744,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.45.Band",
 				"desc": "arcamTuner.Preset.45.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3681,7 +3771,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.46.Band",
 				"desc": "arcamTuner.Preset.46.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3706,7 +3798,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.47.Band",
 				"desc": "arcamTuner.Preset.47.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3731,7 +3825,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.48.Band",
 				"desc": "arcamTuner.Preset.48.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3756,7 +3852,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.49.Band",
 				"desc": "arcamTuner.Preset.49.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3781,7 +3879,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.50.Band",
 				"desc": "arcamTuner.Preset.50.Band",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false,
 				"Zn": "01",
 				"Cc": "1b",
@@ -3807,7 +3907,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.02.StationName",
 				"desc": "arcamTuner.Preset.02.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3817,7 +3919,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.03.StationName",
 				"desc": "arcamTuner.Preset.03.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3827,7 +3931,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.04.StationName",
 				"desc": "arcamTuner.Preset.04.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3837,7 +3943,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.05.StationName",
 				"desc": "arcamTuner.Preset.05.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3847,7 +3955,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.06.StationName",
 				"desc": "arcamTuner.Preset.06.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3857,7 +3967,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.07.StationName",
 				"desc": "arcamTuner.Preset.07.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3867,7 +3979,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.08.StationName",
 				"desc": "arcamTuner.Preset.08.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3877,7 +3991,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.09.StationName",
 				"desc": "arcamTuner.Preset.09.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3887,7 +4003,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.10.StationName",
 				"desc": "arcamTuner.Preset.10.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3897,7 +4015,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.11.StationName",
 				"desc": "arcamTuner.Preset.11.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3907,7 +4027,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.12.StationName",
 				"desc": "arcamTuner.Preset.12.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3917,7 +4039,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.13.StationName",
 				"desc": "arcamTuner.Preset.13.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3927,7 +4051,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.14.StationName",
 				"desc": "arcamTuner.Preset.14.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3937,7 +4063,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.15.StationName",
 				"desc": "arcamTuner.Preset.15.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3947,7 +4075,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.16.StationName",
 				"desc": "arcamTuner.Preset.16.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3957,7 +4087,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.17.StationName",
 				"desc": "arcamTuner.Preset.17.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3967,7 +4099,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.18.StationName",
 				"desc": "arcamTuner.Preset.18.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3977,7 +4111,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.19.StationName",
 				"desc": "arcamTuner.Preset.19.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3987,7 +4123,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.20.StationName",
 				"desc": "arcamTuner.Preset.20.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -3997,7 +4135,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.21.StationName",
 				"desc": "arcamTuner.Preset.21.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4007,7 +4147,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.22.StationName",
 				"desc": "arcamTuner.Preset.22.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4017,7 +4159,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.23.StationName",
 				"desc": "arcamTuner.Preset.23.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4027,7 +4171,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.24.StationName",
 				"desc": "arcamTuner.Preset.24.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4037,7 +4183,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.25.StationName",
 				"desc": "arcamTuner.Preset.25.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4047,7 +4195,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.26.StationName",
 				"desc": "arcamTuner.Preset.26.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4057,7 +4207,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.27.StationName",
 				"desc": "arcamTuner.Preset.27.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4067,7 +4219,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.28.StationName",
 				"desc": "arcamTuner.Preset.28.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4077,7 +4231,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.29.StationName",
 				"desc": "arcamTuner.Preset.29.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4087,7 +4243,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.30.StationName",
 				"desc": "arcamTuner.Preset.30.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4097,7 +4255,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.31.StationName",
 				"desc": "arcamTuner.Preset.31.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4107,7 +4267,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.32.StationName",
 				"desc": "arcamTuner.Preset.32.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4117,7 +4279,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.33.StationName",
 				"desc": "arcamTuner.Preset.33.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4127,7 +4291,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.34.StationName",
 				"desc": "arcamTuner.Preset.34.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4137,7 +4303,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.35.StationName",
 				"desc": "arcamTuner.Preset.35.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4147,7 +4315,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.36.StationName",
 				"desc": "arcamTuner.Preset.36.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4157,7 +4327,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.37.StationName",
 				"desc": "arcamTuner.Preset.37.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4167,7 +4339,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.38.StationName",
 				"desc": "arcamTuner.Preset.38.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4177,7 +4351,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.39.StationName",
 				"desc": "arcamTuner.Preset.39.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4187,7 +4363,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.40.StationName",
 				"desc": "arcamTuner.Preset.40.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4197,7 +4375,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.41.StationName",
 				"desc": "arcamTuner.Preset.41.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4207,7 +4387,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.42.StationName",
 				"desc": "arcamTuner.Preset.42.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4217,7 +4399,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.43.StationName",
 				"desc": "arcamTuner.Preset.43.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4227,7 +4411,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.44.StationName",
 				"desc": "arcamTuner.Preset.44.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4237,7 +4423,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.45.StationName",
 				"desc": "arcamTuner.Preset.45.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4247,7 +4435,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.46.StationName",
 				"desc": "arcamTuner.Preset.46.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4257,7 +4447,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.47.StationName",
 				"desc": "arcamTuner.Preset.47.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4267,7 +4459,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.48.StationName",
 				"desc": "arcamTuner.Preset.48.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4277,7 +4471,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.49.StationName",
 				"desc": "arcamTuner.Preset.49.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4287,7 +4483,9 @@
 			"common": {
 				"name": "arcamTuner.Preset.50.StationName",
 				"desc": "arcamTuner.Preset.50.StationName",
-				"type": "string",				"role": "state",				"read": true,
+				"type": "string",
+				"role": "state",
+				"read": true,
 				"write": false
 			},
 			"native": {}
@@ -4662,7 +4860,3 @@
 		}		
 	]
 }
-	
-	
-
-
