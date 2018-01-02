@@ -2,8 +2,11 @@
 	"common": {
 		"name": "arcam",
 		"version": "0.0.3",
-		"title": "Arcam Adapter",
-		"desc": "Arcam AVR adapter (AVR390/550/850/AV860/SR250)",
+		"title": "Arcam AVR Adapter",
+		"desc": {
+			"en": "Controls Arcam AVR390/550/850/AV860/SR250 via network",
+			"de": "Steuert Arcam AVR390/550/850/AV860/SR250 über das Netzwerk"
+			},
 		"platform": "Javascript/Node.js",
 		"mode": "daemon",
 		"icon": "arcam.png",
@@ -16,8 +19,8 @@
 		"type": "multimedia",
 		"authors": ["Schorsch99"],
 		"license": "MIT",
-		"readme": "README.md",
-		"extIcon": "arcam.png"
+		"readme": "https://github.com/Schorsch99/ioBroker.arcam/blob/master/README.md",
+		"extIcon": "https://github.com/Schorsch99/ioBroker.arcam/blob/master/admin/arcam.png"
 	},
 	"native": {
 		"host": "192.168.178.101",
