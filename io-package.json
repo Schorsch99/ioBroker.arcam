@@ -20,7 +20,7 @@
 		"authors": ["Schorsch99"],
 		"license": "MIT",
 		"readme": "https://github.com/Schorsch99/ioBroker.arcam/blob/master/README.md",
-		"extIcon": "https://github.com/Schorsch99/ioBroker.arcam/blob/master/admin/arcam.png"
+		"extIcon": "https://raw.githubusercontent.com/Schorsch99/ioBroker.arcam/master/admin/arcam.png"
 	},
 	"native": {
 		"host": "192.168.178.101",
