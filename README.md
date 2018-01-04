@@ -63,6 +63,11 @@ not implemented yet.
 
 ## Changelog:
 
+### 0.0.4
+rename some states
+update index html
+bugfixes
+
 ### 0.0.3
 complete redesign
 states and commands now embedded in io-package.json
