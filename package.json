@@ -26,7 +26,6 @@
     ]
   ],
   "_from": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
-  "_id": "iobroker.arcam@0.0.3",
   "_inCache": true,
   "_location": "/iobroker.arcam",
   "_phantomChildren": {},
@@ -47,9 +46,7 @@
   "_shrinkwrap": null,
   "_spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
   "_where": "/",
-  "author": {
-    "name": "Schorsch99"
-  },
+  "author": "Schorsch99",
   "bugs": {
     "url": "https://github.com/Schorsch99/iobroker.arcam/issues"
   },
@@ -66,8 +63,6 @@
   "main": "arcam.js",
   "name": "iobroker.arcam",
   "optionalDependencies": {},
-  "readme": "![Logo](img/arcam.png)\n# ioBroker.arcam\n\nThis adapter allows control of ARCAM AVRs AVR390/550/850/AV860/SR250 via TCP/IP.\n\nDefault Port is 50000, but different port ban be given in IP:port notation (e.g. 192.168.178.100:50000).\n\nThe main features are implemented, currently the following are still unsupported:\n\n- restore factory default settings\n- save/restore secure copy of setting\n- set/request Input name\n- Heartbeat\n\n\n I have used this Arcam-document as a reference:\n\n* RS232_860_850_550_390_250_SH274E_C_091116.pdf\n\nThe pdf-file is available for download on the Arcam website.\n\n## Additional Features:\n\n### Autocreation of states\n\nOn startup the adapter checks if the required states exist, if not, these are created by the script.\n\n### Autorequest\nAfter verifying/creating the states and after each connect, update requests are sent to the AVR for all implemented states.\n\nEvery State with \".Ctl\" in the statename is intended to be used with a pushbutton or text widget, e.g. \"arcamAudio.Tone.Treble.Ctl_Up\" to increment the treble level by 1dB each time the button is activated. \n\n### Direct FM Tuning\nArcam does not offer a direct tune feature for FM, neither via remote control, nor via IP command.\nI have implemented a function to \"simulate\" direct tuning.\nEntering an FM frequency into a text widget connected to the state \"arcamTuner.FM.Tune.Ctl_DirectTune\" will start the tuning to reach the target frequency.\nThe target frequency can be entered with or without delimiter and with or without trailing \"0\".\nUnfortunately the ARCAM only allows tuning in 0.05 MHz steps and needs time between IP-messages to react. Therefore the tuning process is rather slow, but still better than manual tuning via remote...\n\n### Limit Volume (increase) Steps\nVolume steps initiated through a script or via a Vis-Widget can be limited to a configurable number of decibels (Adapter Configuration dialog: default: 10 / disable with 100).\nThis means that any request for a single volume step exceeding 10dB will be limited to said 10dB.\nThis feature is useful to prevent accidentally blowing your speakers... \n\n## Planned Features:\n\n### Smooth Volume\nSmooth Volume prevents rough volume steps by interpolating between current and target volume.\nnot implemented yet.\n\n### Soft Mute\nSimilar to Smooth Volume, but with target Volume \"0\" and resume to previous volume.\nnot implemented yet.\n\n### Step Mute\nDecreases Volume by a configurable number of decibels (Adapter Configuration dialog: default: 20 / disable with 100)\nnot implemented yet.\n\n### Autodiscover:\nnot implemented yet.\n\n\n\n## Changelog:\n\n### 0.0.3\ncomplete redesign\nstates and commands now embedded in io-package.json\n\n\n### 0.0.2\narcam.js:\nclean up code and comments\nfix autoRequest\nfix Volume2\nfix Limit Volume (increase) Steps\nadd config parameters\n\nio-package.json:\nadd config parameters\n\nindex.html\nadd config parameters\n\n### 0.0.1\n* initial version\n\n\n\n",
-  "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Schorsch99/iobroker.arcam.git"
@@ -75,5 +70,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.3"
+  "version": "0.0.4"
 }

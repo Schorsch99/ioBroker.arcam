@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "arcam",
-		"version": "0.0.3",
+		"version": "0.0.4",
 		"title": "Arcam AVR Adapter",
 		"desc": {
 			"en": "Controls Arcam AVR390/550/850/AV860/SR250 via network",
@@ -24,7 +24,7 @@
 	},
 	"native": {
 		"host": "192.168.178.101",
-		"port": "50000",
+		"port": 50000,
 		"volumeStepLimit": 10,
 		"enableSmoothVolume": true,
 		"smoothVolRiseTime": 500,
