@@ -17,9 +17,12 @@ var port;
 var volumeStepLimit;
 var smoothVolRiseTime;
 var smoothVolFallTime;
-var softMuteRiseTime;
-var softMuteFallTime;
-var stepMuteAttenuation;
+var slowMuteRiseTime;
+var slowMuteFallTime;
+var softMuteAttenuation;
+var enableSmoothVolume;
+var enableSlowMute;
+var enableSoftMute;
 var stateCache = {
 	currentInput: "",
 	currentInput2: "",
@@ -872,11 +875,14 @@ function main() {
 	host = adapter.config.host;
 	port = adapter.config.port;
 	volumeStepLimit = parseInt(adapter.config.volumeStepLimit, 10);
+	enableSmoothVolume = adapter.config.enableSmoothVolume;
 	smoothVolRiseTime = parseInt(adapter.config.smoothVolRiseTime, 10);
 	smoothVolFallTime = parseInt(adapter.config.smoothVolFallTime, 10);
-	softMuteRiseTime = parseInt(adapter.config.softMuteRiseTime, 10);
-	softMuteFallTime = parseInt(adapter.config.softMuteFallTime, 10);
-	stepMuteAttenuation = parseInt(adapter.config.stepMuteAttenuation, 10);
+	enableSlowMute = adapter.config.enableSlowMute;
+	slowMuteRiseTime = parseInt(adapter.config.slowMuteRiseTime, 10);
+	slowMuteFallTime = parseInt(adapter.config.slowMuteFallTime, 10);
+	enableSoftMute = adapter.config.enableSoftMute;
+	softMuteAttenuation = parseInt(adapter.config.stepMuteAttenuation, 10);
 	createStatesIfNotExist();
 	adapter.subscribeStates('*'); // subscribe to all states inside the adapter's namespace
 	statesReady = 1;
@@ -930,17 +936,17 @@ Einführen globale Variable stateCache.currentVolume und stateCache.currentVolum
 Einführen globale Variable volumeMemory und volumeMemory2, wird nur zu Beginn eines Ramp-Vorgangs beschrieben
 
 Konfiguration: softVolumeRampTime // '0' = OFF
-Konfiguration: softMuteRampTime // '0' = OFF
+Konfiguration: slowMuteRampTime // '0' = OFF
 Konfiguration: fixedMuteLevel // e.g. 20dB
 (Konfiguration: bei fixedMuteLevel Display blinken yes/no)
 
 SoftVolume: hole stateCache.currentVolume & targetVolume
-(bei SoftMute: targetVolume = '0')
+(bei slowMute: targetVolume = '0')
 (bei muteFixedLevel: targetVolume = stateCache.currentvolume - fixedMuteLevel)
 
 volumeMemory = stateCache.currentVolume // define startlevel // to memorize last "normal" volume for later resume
 numberOfSteps = Runden (rampTime / requiredMessageDelay); // determine no of Steps based on desired ramp time and required message delay time
-an dieser Stelle rampTime je nach aktivierter Funktion wählen (softMute oder softVolume)
+an dieser Stelle rampTime je nach aktivierter Funktion wählen (slowMute oder softVolume)
 
 softVolumeStep = Runden((targetVolume - stateCache.currentVolume) / numberOfSteps) // aktuelle Lautstärke und runde auf Ganzahl(5 Schritte als Beispiel, ausprobieren was gut geht)
 

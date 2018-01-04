@@ -8,45 +8,61 @@
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 <script type="text/javascript">
     systemDictionary = {
-        "Arcam adapter settings": {"de": "Arcam Einstellungen", "en": "Arcam Settings"},
+        "Arcam adapter settings": {"de": "Einstellungen", "en": "Settings"},
         "on save adapter restarts with new config immediately": {
             "de": "Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet.",
          },
 		"Arcam IP": {
-            "de": "Arcam IP Adresse",
-            "en": "Arcam IP Address"
+            "de": "Arcam IP Adresse:",
+            "en": "Arcam IP Address:"
         },
 		"Arcam port": {
-		    "de": "Arcam port (default: 50000)",
-            "en": "Arcam port (default: 50000)"
+		    "de": "Arcam port:",
+            "en": "Arcam port:"
         },
-		"Number of Presets": {
-            "de": "Anzahl Senderspeicher",
-            "en": "Number of Tuner Presets"
+		"Limit Volume Increase Step": {
+            "de": "Lautstärkeerhöhung begrenzen",
+            "en": "Limit Volume Increase Step"
+        },
+		"Smooth Volume": {
+            "de": "Smooth Volume",
+            "en": "Smooth Volume"
+        },
+		"Slow Mute": {
+            "de": "Slow Mute",
+            "en": "Slow Mute"
+        },
+		"IP Settings": {
+            "de": "IP und Port Einstellungen",
+            "en": "IP and Port Settings"
+        },
+		"Special Functions": {
+            "de": "Sonderfunktionen",
+            "en": "Special Functions"
         },
 		"Volume Step Limit": {
-            "de": "max. Schritt LautstärkeerhöhungAddress [in dB, 100 = AUS]",
-            "en": "max. Volume increase step [in dB, 100 = OFF]"
+            "de": "max. Lautstärkeschritt [dB]:",
+            "en": "max. Volume step [dB]:"
         },
 		"Smooth Volume Rise Time": {
-            "de": "Anstiegszeit bis Ziellautstärke [in ms, 0 = AUS]",
-            "en": "Rise time to reach target volume [in ms, 0 = OFF]"
+            "de": "Anstiegszeit [ms]:",
+            "en": "Rise time [ms]:"
         },
 		"Smooth Volume Fall Time": {
-            "de": "Abfallzeit bis Ziellautstärke [in ms, 0 = AUS]",
-            "en": "Fall time to reach target volume [in ms, 0 = OFF]"
+            "de": "Abfallzeit [ms]:",
+            "en": "Fall time [ms]:"
         },
-		"Soft Mute Rise Time": {
-            "de": "Anstiegszeit bis Ziellautstärke [in ms, 0 = AUS]",
-            "en": "Rise time to reach target volume [in ms, 0 = OFF]"
+		"Slow Mute Rise Time": {
+            "de": "Anstiegszeit [ms]:",
+            "en": "Rise time [ms]:"
         },
-		"Soft Mute Fall Time": {
-            "de": "Abfallzeit bis Ziellautstärke [in ms, 0 = AUS]",
-            "en": "Fall time to reach target volume [in ms, 0 = OFF]"
+		"Slow Mute Fall Time": {
+            "de": "Abfallzeit [ms]:",
+            "en": "Fall time [ms]:"
         },	
-		"Step Mute Attenuation": {
-            "de": "Step Mute Lautstärkereduzierung [in dB, 100 = AUS]",
-            "en": "Step Mute Volume Attenuation [in dB, 100 = AUS]"
+		"Soft Mute Attenuation": {
+            "de": "Soft Mute [dB]:",
+            "en": "Soft Mute [dB]:"
         }
 	 };
 
@@ -79,44 +95,60 @@
 </script>
 
 <div id="adapter-container">
-    <table><tr><td><img src="arcam.png"></td><td><h3 class="translate">Arcam adapter settings</h3></td></tr></table>
-    <p>&nbsp;</p>
+    <table><tr>
+	<td><img src="arcam.png" width="128px" height="128px"></td>
+	<td style="padding-top: 20px;padding-left: 10px"><h3 class="translate">Arcam adapter settings</h3></td>
+	</tr></table>
+    <h4 class="translate">IP settings</h4>
+	<p>&nbsp;</p>
     <table>
         <tr>
             <td class="translate">Arcam IP</td>
-            <td><input type="text" id="host" class="value"></td>
+            <td><input type="text" id="host" class="value" maxlength= "15" size="15"></td>
         </tr>
 		<tr>
             <td class="translate">Arcam port</td>
-            <td><input type="text" id="port" class="value"></td>
+            <td><input type="number" id="port" class="value" maxlength= "5" size="5"></td>
+        </tr>
+	</table>
+
+	<h4 class="translate">Special Functions</h4>
+    <table>
+		<tr>
+            <td class="translate">Limit Volume Increase Step</td>
+            <td><input type="checkbox" id="enableVolumeStepLimit" class="value"></td>
+			<td class="translate">Volume Step Limit</td>
+			<td><input type="number" id="volumeStepLimit" class="value" maxlength="2" size="2" min="1"></td>
         </tr>
 		<tr>
-            <td class="translate">Number of Presets</td>
-            <td><input type="text" id="qtyTunerPresets" class="value"></td>
+            <td class="translate">Smooth Volume</td>
+            <td><input type="checkbox" id="enableSmoothVolume" class="value"></td>
+			<td class="translate">Smooth Volume Rise Time</td>
+            <td><input type="number" id="smoothVolRiseTime" class="value" maxlength="4" size="4" min="0"></td>
         </tr>
 		<tr>
-            <td class="translate">Volume Step Limit</td>
-            <td><input type="text" id="volumeStepLimit" class="value"></td>
+            <td/td>
+			<td/td>
+			<td class="translate">Smooth Volume Fall Time</td>
+            <td><input type="number" id="smoothVolFallTime" class="value" maxlength="4" size="4"  min="0"></td>
         </tr>
 		<tr>
-            <td class="translate">Smooth Volume Rise Time</td>
-            <td><input type="text" id="smoothVolRiseTime" class="value"></td>
+            <td class="translate">Slow Mute</td>
+            <td><input type="checkbox" id="enableSlowMute" class="value"></td>
+			<td class="translate">Slow Mute Rise Time</td>
+            <td><input type="number" id="slowMuteRiseTime" class="value" maxlength="4" size="4"  min="0"></td>
         </tr>
 		<tr>
-            <td class="translate">Smooth Volume Fall Time</td>
-            <td><input type="text" id="smoothVolFallTime" class="value"></td>
+            <td/td>
+			<td/td>
+			<td class="translate">Slow Mute Fall Time</td>
+            <td><input type="number" id="slowMuteFallTime" class="value" maxlength="4" size="4"  min="0"></td>
         </tr>
 		<tr>
-            <td class="translate">Soft Mute Rise Time</td>
-            <td><input type="text" id="softMuteRiseTime" class="value"></td>
-        </tr>
-		<tr>
-            <td class="translate">Soft Mute Fall Time</td>
-            <td><input type="text" id="softMuteFallTime" class="value"></td>
-        </tr>
-		<tr>
-            <td class="translate">Step Mute Attenuation</td>
-            <td><input type="text" id="stepMuteAttenuation" class="value"></td>
+            <td class="translate">Soft Mute</td>
+            <td><input type="checkbox" id="enableSoftMute" class="value"></td>
+			<td class="translate">Soft Mute Attenuation</td>
+            <td><input type="number" id="softMuteAttenuation" class="value" maxlength="2" size="2"  min="5"></td>
         </tr>
     </table>
 </div>

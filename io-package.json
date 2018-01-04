@@ -25,13 +25,15 @@
 	"native": {
 		"host": "192.168.178.101",
 		"port": "50000",
-		"qtyTunerPresets": "50",
-		"volumeStepLimit": "10",
-		"smoothVolRiseTime": "500",
-		"smoothVolFallTime": "500",
-		"softMuteRiseTime": "500",
-		"softMuteFallTime": "500",
-		"stepMuteAttenuation": "20"
+		"volumeStepLimit": 10,
+		"enableSmoothVolume": true,
+		"smoothVolRiseTime": 500,
+		"smoothVolFallTime": 500,
+		"enableSlowMute": true,
+		"slowMuteRiseTime": 500,
+		"slowMuteFallTime": 500,
+		"enableSoftMute": true,
+		"softMuteAttenuation": 20
 	},
 	"objects": [],
 	"instanceObjects": [
@@ -2465,11 +2467,11 @@
 			},
 			"native": {}
 	},
-	{		"_id": "arcamTuner.FM.Tune.Ctl_DirectTune",
+	{		"_id": "arcamTuner.FM.Tune.DirectTune.Ctl",
 			"type": "state",
 			"common": {
-				"name": "arcamTuner.FM.Tune.Ctl_DirectTune",
-				"desc": "arcamTuner.FM.Tune.Ctl_DirectTune",
+				"name": "FM Direct Tune Feature",
+				"desc": "Enter FM Target Frequency",
 				"type": "string",
 				"role": "value",
 				"read": true,
