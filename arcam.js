@@ -2,7 +2,7 @@
 /*
 Arcam Adapter for iobroker
 LD 12-2017
-0.0.3
+0.0.5
  */
 
 var configJSON = require('./io-package.json');
@@ -20,9 +20,14 @@ var smoothVolFallTime;
 var slowMuteRiseTime;
 var slowMuteFallTime;
 var softMuteAttenuation;
+var enableVolumeStepLimit;
 var enableSmoothVolume;
 var enableSlowMute;
 var enableSoftMute;
+var minimumMessageDelay = 200;
+var stateChangeInhibit = 0;
+var smoothVolumeActive = 0;
+var targetVolume;
 var stateCache = {
 	currentInput: "",
 	currentInput2: "",
@@ -88,7 +93,6 @@ adapter.on('stateChange', function (id, state) { //if adapter state changes do
 	var idStateName = S(id).strip(deleteStr).s; // remove string
 	
 	if (idStateName.indexOf(".Ctl") > -1) { // if stateName contains ".Ctl_" then change to Control handling
-//		adapter.log.debug("ControlState change: " + idStateName + " " + state.val);
 		var controlReturn = control(idStateName, state.val);
 	}
 
@@ -97,16 +101,19 @@ adapter.on('stateChange', function (id, state) { //if adapter state changes do
 		break Tx_Block;
 	}
 	var commMode = "Tx";
-//	adapter.log.debug("State change: " + idStateName + " " + state.val);
-	var resultArrayTx = lookupTx(idStateName, state.val, commMode);
+	sendMessage(idStateName, state.val, commMode);
+	}
+});
+
+function sendMessage(_stateName, _stateVal, _direction){
+	var resultArrayTx = lookupTx(_stateName, _stateVal, _direction);
 	if ((resultArrayTx[0])&&(resultArrayTx[1])&&(resultArrayTx[2])){
 		var Tx_Cc = resultArrayTx[0];
 		var Tx_Zn = resultArrayTx[1];
 		var Tx_Data_Str = resultArrayTx[2] + "";
 		sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str); // send Data
 	}
-	}
-});
+}
 
 function lookupTx(idStateName, stateVal, commMode){ // lookup function for Outgoing Data		
 		var resultArrayLookupTx = [];
@@ -236,7 +243,7 @@ function sendIP(Tx_Zn, Tx_Cc, Tx_Data_Str) { //send IP based on arguments
 	buffer.writeUInt8(Tx_Et, 4 + Tx_Dl);
 	if (connecting === false) {
 		socketAVR.write(buffer); // write Buffer to IP socket
-		//adapter.log.debug("Gesendet wird: TxCc= " + Tx_Cc + " TxZn: " + Tx_Zn + " TxData: " + writeData);
+		adapter.log.debug("Gesendet wird: TxCc= " + Tx_Cc + " TxZn: " + Tx_Zn + " TxData: " + writeData);
 		} else {
 		return "Tx error";
 	}
@@ -419,9 +426,10 @@ function connectToArcam(host) {
 							break;
 						case "arcamTuner.Preset":
 							var stateCount = 2;
-							stateName = resultArrayRx[0] + resultArrayRx[1] + "Band";
+							var presetNo = S(resultArrayRx[1] + "").padLeft(2, 0).s
+							stateName = resultArrayRx[0] + "." + presetNo + ".Band";
 							stateVal = resultArrayRx[2];
-							stateName2 = resultArrayRx[0] + resultArrayRx[1] + "StationName";
+							stateName2 = resultArrayRx[0] + "." + presetNo + ".StationName";
 							stateVal2 = resultArrayRx[3];
 							break;
 						default:
@@ -557,19 +565,26 @@ function dataConversion(input, lookupStateValue, encoding, min, max, step, direc
 					if ((output < min) || (output > max)){
 						output = "error";
 					}
-				break;			
+					break;			
 				case "Tx":
 					if ((input < min) || (input > max)){
 					output = "error";
 				} else {
 					switch (Zone)
-					{
-						case "01":
-							output = limitVolumeStep(input, stateCache.currentVolume);
-						break;
-						case "02":
-							output = limitVolumeStep(input, stateCache.currentVolume2);
-						break;
+						{
+							case "01":
+								var currVol = stateCache.currentVolume;
+							break;
+							case "02":
+								var currVol = stateCache.currentVolume2;
+							break;
+						}
+					output = input
+					if (enableVolumeStepLimit === "on"){
+						output = limitVolumeStep(output, currVol);
+					}
+					if ((enableSmoothVolume === "on") && (smoothVolumeActive === 0)){
+						output = smoothVolume(output, currVol, Zone);
 					}
 					output = output.toString(16);
 					if (output.length % 2 != 0){
@@ -640,6 +655,7 @@ function dataConversion(input, lookupStateValue, encoding, min, max, step, direc
 	}
 			return output;
 }
+
 
 function dataSplit(dataToBeSplit, dataStart, dataLength){
 	var sliceStart = 2 * dataStart; // conversion bytes in String characters
@@ -861,6 +877,51 @@ if ((targetVol - currentVol) > volumeStepLimit){
 return filteredVolume;
 }
 
+function smoothVolume(targetVol, currentVol, Zone){
+// sends interpolated Volume values tbd
+	//targetVolume = targetVol;
+	smoothVolumeActive = 1;
+	var deltaVol =  targetVol - currentVol;
+	if (deltaVol >= 0){
+		var transitionTime = smoothVolRiseTime;
+	} else {
+		var transitionTime = smoothVolFallTime;
+	}	
+	var steps = Math.floor(transitionTime/minimumMessageDelay) -1;
+	var volumeStep = Math.floor(deltaVol / steps);
+	var smoothVolumeArray = [];
+	for (var i = 0; i < steps; i++){
+		smoothVolumeArray[i] = currentVol + ((i + 1) * volumeStep);
+	}
+	smoothVolumeArray[steps] = targetVol;
+	/*for (var j = 0; j < steps; j++){
+		sendMessage("arcamAudio.Volume.Volume", smoothVolumeArray[j], "Tx");
+	}*/
+	var delayTime = transitionTime / steps;
+	var j = 1;
+	//adapter.log.debug(requestSelect);
+	var lastStep = setTimeout(function sendSmoothVolume() {
+		if (j <= steps){
+			switch (Zone)
+			{
+			case "01":
+				sendMessage("arcamAudio.Volume.Volume", smoothVolumeArray[j], "Tx");
+			break;
+			case "02":
+				sendMessage("arcamAudio.Volume.Volume2", smoothVolumeArray[j], "Tx");
+			break;
+			}
+			j++;
+			var mumpitz = setTimeout(sendSmoothVolume, delayTime);	
+		}
+		else { 
+				smoothVolumeActive = 0;
+				return;
+		}
+	}, delayTime)
+	return smoothVolumeArray[0];
+}
+
 function main() {
 	
 	adapter.log.debug("<< ADAPTER MAIN BLOCK >>");
@@ -874,6 +935,7 @@ function main() {
 	}*/
 	host = adapter.config.host;
 	port = adapter.config.port;
+	enableVolumeStepLimit =  adapter.config.enableVolumeStepLimit;
 	volumeStepLimit = parseInt(adapter.config.volumeStepLimit, 10);
 	enableSmoothVolume = adapter.config.enableSmoothVolume;
 	smoothVolRiseTime = parseInt(adapter.config.smoothVolRiseTime, 10);

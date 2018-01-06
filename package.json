@@ -23,6 +23,18 @@
         "type": "remote"
       },
       "/"
+    ],
+    [
+      {
+        "raw": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
+        "type": "remote"
+      },
+      "/home"
     ]
   ],
   "_from": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
@@ -45,7 +57,7 @@
   "_shasum": "a2fdd11dd932eff695bbcbe89f7ad6411b41d857",
   "_shrinkwrap": null,
   "_spec": "https://github.com/Schorsch99/ioBroker.arcam/tarball/master",
-  "_where": "/",
+  "_where": "/home",
   "author": "Schorsch99",
   "bugs": {
     "url": "https://github.com/Schorsch99/iobroker.arcam/issues"
@@ -70,5 +82,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "arcam",
-		"version": "0.0.4",
+		"version": "0.0.5",
 		"title": "Arcam AVR Adapter",
 		"desc": {
 			"en": "Controls Arcam AVR390/550/850/AV860/SR250 via network",
@@ -2500,8 +2500,8 @@
 						"values": [
 							{
 								"stateValue": "VALUE",
-								"valuePrefix": ".",
-								"valueSuffix": ".",
+								"valuePrefix": "",
+								"valueSuffix": "",
 								"dataEncoding": "INTEGER",
 								"min": 1,
 								"max": 50,
@@ -3901,6 +3901,18 @@
 							}
 							]
 							}]
+			},
+			"native": {}
+		}, {
+			"_id": "arcamTuner.Preset.01.StationName",
+			"type": "state",
+			"common": {
+				"name": "arcamTuner.Preset.01.StationName",
+				"desc": "arcamTuner.Preset.01.StationName",
+				"type": "string",
+				"role": "state",
+				"read": true,
+				"write": false
 			},
 			"native": {}
 		}, {
